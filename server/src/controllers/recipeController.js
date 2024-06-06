@@ -73,11 +73,11 @@ const recipeController = {
     }
   },
 
-  getAllRecipe: async (req, res) => {
-    try {
-      const recipes = await prisma.recipe.findMany();
-      if (recipes.length == 0) res.status(401).json({ "Message": "There are no Recipes!!" })
-      res.status(201).json({ recipes });
+  getAllRecipe: async(req,res)=>{
+      try {
+        const recipes = await prisma.recipe.findMany();
+        if(recipes.length==0) return res.status(401).json({"Message":"There are no Recipes!!"})
+        res.status(201).json({recipes});
 
     } catch (error) {
       console.log(error);
@@ -87,14 +87,14 @@ const recipeController = {
   },
   getRecipeById: async (req, res) => {
     try {
-      const { id } = req.params;
-      const recipe = await prisma.recipe.findUnique({
-        where: {
-          id: id
-        }
-      })
-      if (!recipe) res.status(401).json({ "Message": "No Recipe Found!!" });
-      res.status(201).json({ recipe });
+        const {id} = req.params;
+        const recipe = await prisma.recipe.findUnique({
+          where:{
+            id:id
+          }
+        })
+        if(!recipe) res.status(401).json({"Message":"No Recipe Found!!"});
+        res.status(201).json({recipe});
     } catch (error) {
       console.log(error);
       res.status(501).json({ "Message": "Internal Server Error", error })

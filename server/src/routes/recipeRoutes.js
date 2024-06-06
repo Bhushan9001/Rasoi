@@ -2,7 +2,8 @@ const {Router} = require('express');
 const {recipeController, filterController} = require('../controllers/recipeController');
 const passport = require('passport');
 const router = Router();
-const upload=require('../middleware/uploadImage')
+const upload=require('../middleware/uploadImage');
+const { commentController } = require('../controllers/commentsController');
 
 
 
@@ -11,6 +12,7 @@ router.put("/updateRecipe/:id",passport.authenticate('jwt', { session: false }),
 router.delete("/deleteRecipe/:id",passport.authenticate('jwt',{session:false}),recipeController.deleteRecipe);
 router.get("/getRecipes",recipeController.getAllRecipe);
 router.get("/getRecipes/:id",recipeController.getRecipeById);
+
 
 //Filter Routes
 router.get("/userRecipes/:id",passport.authenticate('jwt',{session:false}),filterController.createdByUser);

@@ -6,7 +6,8 @@ require('./src/passport');
 
 //Route Imports
 const userRoutes = require('./src/routes/userRoutes')
-const recipeController = require('./src/routes/recipeRoutes');
+const recipeRoutes = require('./src/routes/recipeRoutes');
+const commentRoutes = require('./src/routes/commentRoutes');
 const path = require('path');
 
 
@@ -16,6 +17,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }))
 app.use(passort.initialize());
 app.use(express.json());
+app.use('/images',express.static(path.join(__dirname,'./images')));
 
 app.post("/",(req,res)=>{
     console.log(req.body.email)
@@ -23,7 +25,8 @@ app.post("/",(req,res)=>{
 })
 
 app.use("/user",userRoutes);
-app.use("/recipe",recipeController);
+app.use("/recipe",recipeRoutes);
+app.use("/recipe",commentRoutes);
 
 
 

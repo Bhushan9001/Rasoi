@@ -91,6 +91,14 @@ const recipeController = {
         const recipe = await prisma.recipe.findUnique({
           where:{
             id:id
+          },
+          include: {
+            comments: {
+              include: {
+                author: true, // Include the author details of each comment
+              },
+            },
+            author: true, // Include the author details of the recipe
           }
         })
         if(!recipe) res.status(401).json({"Message":"No Recipe Found!!"});
@@ -99,7 +107,8 @@ const recipeController = {
       console.log(error);
       res.status(501).json({ "Message": "Internal Server Error", error })
     }
-  }
+  },
+  
 
 }
 

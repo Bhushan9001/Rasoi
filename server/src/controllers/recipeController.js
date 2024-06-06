@@ -82,7 +82,7 @@ const recipeController = {
   getAllRecipe: async(req,res)=>{
       try {
         const recipes = await prisma.recipe.findMany();
-        if(recipes.length==0) res.status(401).json({"Message":"There are no Recipes!!"})
+        if(recipes.length==0) return res.status(401).json({"Message":"There are no Recipes!!"})
         res.status(201).json({recipes});
 
       } catch (error) {
@@ -99,7 +99,7 @@ const recipeController = {
             id:id
           }
         })
-        if(!recipe) res.status(401).json({"Message":"No Recipe Found!!"});
+        if(!recipe) return res.status(401).json({"Message":"No Recipe Found!!"});
         res.status(201).json({recipe});
     } catch (error) {
       console.log(error);

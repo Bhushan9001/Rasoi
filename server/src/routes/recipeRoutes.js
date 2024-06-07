@@ -3,7 +3,7 @@ const {recipeController, filterController} = require('../controllers/recipeContr
 const passport = require('passport');
 const router = Router();
 const upload=require('../middleware/uploadImage');
-const { commentController } = require('../controllers/commentsController');
+
 
 
 
@@ -12,6 +12,8 @@ router.put("/updateRecipe/:id",passport.authenticate('jwt', { session: false }),
 router.delete("/deleteRecipe/:id",passport.authenticate('jwt',{session:false}),recipeController.deleteRecipe);
 router.get("/getRecipes",recipeController.getAllRecipe);
 router.get("/getRecipes/:id",recipeController.getRecipeById);
+router.get("/search",filterController.searchByTitle);
+router.get("/filter",filterController.filterByIngredients);
 
 
 //Filter Routes

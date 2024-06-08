@@ -128,6 +128,52 @@ const filterController = {
       console.log(error);
       res.status(501).json({ "Message": "Internal Server Error", error });
     }
+  },
+  searchByTitle: async(req,res)=>{
+    try {
+      const {query} = req.query;
+      const recipes = await prisma.recipe.findMany({
+        where:{
+          title:{
+            contains:query,
+            mode:"insensitive"
+          }
+        },
+      })
+      if(recipes.length==0) return res.status(400).json({"Message":"No recipe with this title!!"});
+
+      res.status(201).json({recipes});
+
+    } catch (error) {
+      console.log(error);
+      res.status(501).json({ "Message": "Internal Server Error", error });
+    }
+
+  },
+  filterByIngredients:async(req,res)=>{
+    try {
+      const {ingredients} = req.query;
+
+      const ingredientArray = ingredients.split(',').map(ingredient => ingredient.trim());
+      const recipes = await prisma.recipe.findMany({
+        where:{
+          ingredients:{
+            some:{
+              name:{
+                in:ingredientArray,
+                mode:"insensitive"
+              }
+            }
+          }
+        },
+      })
+      if(recipes.length==0) return res.status(400).json({"Message":"No recipe with this ingredients!!"});
+      res.status(201).json({recipes});
+      
+    } catch (error) {
+      console.log(error);
+      res.status(501).json({ "Message": "Internal Server Error", error });
+    }
   }
 }
 

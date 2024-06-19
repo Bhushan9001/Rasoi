@@ -1,16 +1,12 @@
+import Landing from "./pages/Landing";
+import Navbar from "./components/Navbar";
+
 const App = ()=>{
-
-
   return(
     <>
+    <Navbar/>
+    <Landing/>
     </>
-  )
-}
-
-
-const CardWrapper = ()=>{
-  return(
-
   )
 }
 

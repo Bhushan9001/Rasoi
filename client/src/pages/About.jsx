@@ -3,7 +3,7 @@ import React from 'react'
 const About = () => {
     return (
         <>
-            <div className='text-5xl font-semibold font-barlow-condensed text-center py-8'>
+            <div className='text-5xl font-semibold font-barlow-condensed text-center py-8' name = "About">
                 About Us
             </div>
             <div className='px-6 py-4 md:px-72 md:py-9 font-poppins' style={{ lineHeight: '2.6' }}>

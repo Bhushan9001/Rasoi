@@ -3,15 +3,23 @@ import Navbar from "./components/Navbar";
 import Categories from "./components/Categories";
 import RecipeDetail from "./pages/RecipeDetail";
 import About from "./pages/About";
+import Signup from "./pages/Signup";
+import Signin from "./pages/Signin";
+import { Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import Recipes from "./pages/Recipes";
 
 const App = ()=>{
   return(
     <>
-    <Navbar/>
-    <Landing/>
-    {/* <Categories/> */}
-    <RecipeDetail/>
-    <About/>
+     {/* <Navbar/> */}
+     <Routes>
+       <Route path="/" element={<HomePage/>}/>
+       <Route path="/recipes/:id" element={<RecipeDetail/>}/>
+       <Route path="/recipes/" element={<Recipes/>}/>
+       <Route path="/signup" element={<Signup/>}/>
+       <Route path="/signin" element={<Signin/>}/>
+     </Routes>   
     </>
   )
 }

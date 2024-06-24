@@ -7,7 +7,7 @@ import chinese from '../assets/chinese.png';
 const Categories = () => {
     return (
         <>
-        <div className='text-5xl font-semibold font-barlow-condensed text-center pb-3'>
+        <div className='text-5xl font-semibold font-barlow-condensed text-center pb-3' name="Categories">
             Popular Categories
         </div>
         <div className='md:flex justify-center space-x-14'>

@@ -150,13 +150,18 @@ const filterController = {
     }
 
   },
-  filterByIngredients:async(req,res)=>{
+  filterByIngredientsAndCuisine:async(req,res)=>{
     try {
-      const {ingredients} = req.query;
-
+      const {ingredients,cuisines} = req.query;
+      let cuisineArray
       const ingredientArray = ingredients.split(',').map(ingredient => ingredient.trim());
+      if(cuisines){  cuisineArray = cuisines.split(',').map(cuisine => cuisine.trim());}
       const recipes = await prisma.recipe.findMany({
         where:{
+          cuisine:{
+            in:cuisineArray,
+            mode:"insensitive"
+          },
           ingredients:{
             some:{
               name:{

@@ -1,16 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import boy from '../assets/boy.png';
 import logo from '../assets/logo.png';
+import { Link } from 'react-router-dom';
+import { Link as Scroll } from 'react-scroll';
 
 const Navbar = () => {
+  
   const [isOpen, setIsOpen] = useState(false);
-
+  const [loggedIn , setLoggedIn] = useState(false);
+  useEffect(()=>{
+      const token = localStorage.getItem("token");
+      if(token) setLoggedIn(true)
+      else setLoggedIn(false)
+  },[])
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
 
   return (
-    <nav className="px-3 py-4 bg-white shadow-md">
+    <nav className="px-3 py-4 bg-white shadow-md w-full top-0 fixed z-50">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-2xl font-bold">
         <img className="w-24 h-16 md:w-32 md:h-20" src={logo} alt="Logo" />
@@ -39,23 +47,30 @@ const Navbar = () => {
           </button>
         </div>
         <div className="hidden md:flex flex-1 justify-center items-center space-x-8 font-poppins font-normal text-xl">
-          <a href="/" className="block px-4 py-2 md:px-6 md:py-3 border-2 border-white hover:border-b-[#59c857]">
+          <Scroll to="Home" className="block px-4 py-2 md:px-6 md:py-3 border-2 border-white hover:border-b-[#59c857]" smooth duration={500}>
             Home
-          </a>
-          <a href="/about" className="block px-4 py-2 md:px-6 md:py-3 border-2 border-white hover:border-b-[#59c857]">
+          </Scroll>
+          <Link to="/recipes" className="block px-4 py-2 md:px-6 md:py-3 border-2 border-white hover:border-b-[#59c857]">
             Recipes
-          </a>
-          <a href="/services" className="block px-4 py-2 md:px-6 md:py-3 border-2 border-white hover:border-b-[#59c857]">
+          </Link>
+          <Scroll to="About" className="block px-4 py-2 md:px-6 md:py-3 border-2 border-white hover:border-b-[#59c857]" smooth duration={500}>
             About us
-          </a>
-          <a href="/contact" className="block px-4 py-2 md:px-6 md:py-3 border-2 border-white hover:border-b-[#59c857]">
+          </Scroll>
+          <Scroll to="Categories" className="block px-4 py-2 md:px-6 md:py-3 border-2 border-white hover:border-b-[#59c857]" smooth duration={500}>
             Contact
-          </a>
+          </Scroll>
         </div>
         <div className="hidden md:flex items-center space-x-5 font-poppins font-normal text-xl">
-          <a href="/login" className="">
-            Login
-          </a>
+         {
+          loggedIn?<Link to="/" className="" onClick={()=>{
+          localStorage.removeItem('token');
+          setLoggedIn(false);
+        }}>
+            Logout
+          </Link>:<Link to="/signin" className="">
+          Login
+        </Link> 
+         }
           <div>
             <img className="w-10 h-10" src={boy} alt="Landing" />
           </div>
@@ -63,21 +78,25 @@ const Navbar = () => {
       </div>
       <div className={`${isOpen ? 'block' : 'hidden'} md:hidden mt-4`}>
         <div className="flex flex-col items-center space-y-4 font-poppins font-normal text-xl">
-          <a href="/" className="block px-4 py-2 border-2 border-white hover:border-b-[#68F665]">
+          <Scroll to="Home" className="block px-4 py-2 border-2 border-white hover:border-b-[#68F665]">
             Home
-          </a>
-          <a href="/about" className="block px-4 py-2 border-2 border-white hover:border-b-[#68F665]">
+          </Scroll>
+          <Link href="/recipes" className="block px-4 py-2 border-2 border-white hover:border-b-[#68F665]">
             Recipes
-          </a>
-          <a href="/services" className="block px-4 py-2 border-2 border-white hover:border-b-[#68F665]">
+          </Link>
+          <Scroll to="About" className="block px-4 py-2 border-2 border-white hover:border-b-[#68F665]">
             About us
-          </a>
-          <a href="/contact" className="block px-4 py-2 border-2 border-white hover:border-b-[#68F665]">
+          </Scroll>
+          <Scroll to="Categories" className="block px-4 py-2 border-2 border-white hover:border-b-[#68F665]">
             Contact
-          </a>
-          <a href="/login" className="block px-4 py-2">
-            Login
-          </a>
+          </Scroll>
+          {
+            loggedIn? <Link to={"/"} onClick={()=>{
+              localStorage.removeItem('token');
+              setLoggedIn(false);
+              setIsOpen(false);
+            }}>Logout</Link>:<Link to={"/signin"}>Login</Link>
+          }
           <div>
             <img className="w-10 h-10" src={boy} alt="Landing" />
           </div>

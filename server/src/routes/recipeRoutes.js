@@ -13,7 +13,7 @@ router.delete("/deleteRecipe/:id",passport.authenticate('jwt',{session:false}),r
 router.get("/getRecipes",recipeController.getAllRecipe);
 router.get("/getRecipes/:id",recipeController.getRecipeById);
 router.get("/search",filterController.searchByTitle);
-router.get("/filter",filterController.filterByIngredients);
+router.get("/filter",filterController.filterByIngredientsAndCuisine);
 
 
 //Filter Routes

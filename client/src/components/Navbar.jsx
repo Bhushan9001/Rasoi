@@ -47,16 +47,16 @@ const Navbar = () => {
           </button>
         </div>
         <div className="hidden md:flex flex-1 justify-center items-center space-x-8 font-poppins font-normal text-xl">
-          <Scroll to="Home" className="block px-4 py-2 md:px-6 md:py-3 border-2 border-white hover:border-b-[#59c857]" smooth duration={500}>
+          <Scroll to="Home" className="block px-4 py-2 md:px-6 md:py-3 border-2 border-white hover:border-b-[#59c857] hover:cursor-pointer" smooth duration={500}>
             Home
           </Scroll>
-          <Link to="/recipes" className="block px-4 py-2 md:px-6 md:py-3 border-2 border-white hover:border-b-[#59c857]">
+          <Link to="/recipes" className="block px-4 py-2 md:px-6 md:py-3 border-2 border-white hover:border-b-[#59c857] hover:cursor-pointer">
             Recipes
           </Link>
-          <Scroll to="About" className="block px-4 py-2 md:px-6 md:py-3 border-2 border-white hover:border-b-[#59c857]" smooth duration={500}>
+          <Scroll to="About" className="block px-4 py-2 md:px-6 md:py-3 border-2 border-white hover:border-b-[#59c857] hover:cursor-pointer" smooth duration={500}>
             About us
           </Scroll>
-          <Scroll to="Categories" className="block px-4 py-2 md:px-6 md:py-3 border-2 border-white hover:border-b-[#59c857]" smooth duration={500}>
+          <Scroll to="Categories" className="block px-4 py-2 md:px-6 md:py-3 border-2 border-white hover:border-b-[#59c857] hover:cursor-pointer" smooth duration={500}>
             Contact
           </Scroll>
         </div>

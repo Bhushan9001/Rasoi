@@ -131,24 +131,6 @@ const Recipes = () => {
             ))
           }
         </div>
-
-        {/* <div className='ps-36 font-barlow-condensed text-4xl font-semibold py-4'>
-        Delicious Discoveries
-      </div>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 justify-center'>
-        {recipes && recipes.map((recipe) => {
-          const imgPath = recipe.imageurl.replace(/\\/g, '/');
-          return (
-            <Card 
-              key={recipe.title} 
-              img={imgPath} 
-              title={recipe.title} 
-              cuisine={recipe.cuisine} 
-              chef={recipe.authorName} 
-            />
-          );
-        })}
-      </div> */}
       </div>
     </>
   )

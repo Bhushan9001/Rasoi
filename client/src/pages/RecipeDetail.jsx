@@ -1,25 +1,46 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import dosa from '../assets/dosa.png';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const RecipeDetail = () => {
+
+  const [recipe, setRecipe] = useState({})
+  const { id } = useParams();
+  useEffect(() => {
+    const fetchRecipes = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/recipe/getRecipes/${id}`);
+        if (response.data) {
+          console.log(response.data.recipe);
+          setRecipe(response.data.recipe);
+        }
+      } catch (error) {
+        console.error('Error fetching recipe:', error);
+      }
+    };
+
+    fetchRecipes();
+  }, [])
+
   return (
     <div className='md:flex w-full'>
       <div className='px-6 md:px-12 py-7 w-full md:w-2/6'>
         <div className='font-semibold text-5xl font-barlow-condensed text-[#037800]'>
-          Masala Dosa
+          {recipe.title}
         </div>
 
         <div className='text-3xl font-barlow-condensed font-normal py-4 flex space-x-3'>
-          <div>Cuisine : <span className='font-semibold text-[#428C41]'>Indian</span></div>
-          <div>Type : <span className='font-semibold text-[#428C41]'>Breakfast</span></div>
+          <div>Cuisine : <span className='font-semibold text-[#428C41]'>{recipe.cuisine}</span></div>
+          <div>Type : <span className='font-semibold text-[#428C41]'>{recipe.type}</span></div>
         </div>
 
         <div className='font-poppins font-medium text-xl'>
-          Crispy rice and lentil crepes filled with a spicy potato filling.
+          {recipe.description}
         </div>
 
 
-        <img className='mt-8 my-6 w-96 md:w-[95%] h-auto rounded-xl' src={dosa} alt='Dosa' />
+        <img className='mt-8 my-6 w-96 md:w-[95%] h-60 rounded-xl' src={recipe.imageurl} alt='Dosa' />
 
       </div>
 
@@ -31,18 +52,15 @@ const RecipeDetail = () => {
           <div className='py-6 px-4'>
             <table className='text-xl font-normal font-poppins'>
               <tbody>
-                <tr>
-                  <td className='w-28'>Rice</td>
-                  <td className='w-28'>2 cups</td>
-                </tr>
-                <tr>
-                  <td>Urad Dal</td>
-                  <td>1 cup</td>
-                </tr>
-                <tr>
-                  <td>Potato</td>
-                  <td>4</td>
-                </tr>
+                {recipe && Array.isArray(recipe.ingredients) && recipe.ingredients.map((ingredient, index) => {
+                  return (
+                    <tr key={index}>
+                      <td className='w-28'>{ingredient.name}</td>
+                      <td className='w-28'>{ingredient.quantity}</td>
+                    </tr>
+                  );
+                })}
+
               </tbody>
 
             </table>
@@ -54,13 +72,10 @@ const RecipeDetail = () => {
             Instructions
           </div>
           <div className='m-6 p-6 rounded-lg border-2 border-[#68F665] text-xl font-poppins font-normal'>
-            <ol className='ps-7 list-decimal'>
-              <li>Soak rice and urad dal overnight.</li>
-              <li>Grind to a smooth batter and ferment overnight.</li>
-              <li>Prepare the potato filling by cooking potatoes with onions, mustard seeds, and spices.</li>
-              <li>Spread a ladle of batter on a hot griddle to make a thin crepe.</li>
-              <li>Place the potato filling in the center and fold the dosa.</li>
-              <li>Serve hot with chutney and sambar.</li>
+            <ol className='ps-7 list-decimal space-y-3'>
+              {recipe&&Array.isArray(recipe.instruction)&&recipe.instruction.map((inst)=>{
+                return <li key={inst}>{inst}</li>
+              })}
             </ol>
           </div>
 

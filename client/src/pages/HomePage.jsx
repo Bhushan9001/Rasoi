@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import Landing from './Landing'
 import Categories from '../components/Categories'
 import About from './About'
+import Footer from '../components/Footer'
 
 function HomePage() {
   return (
@@ -11,6 +12,7 @@ function HomePage() {
       <Landing/>
       <Categories/>
       <About/>
+      <Footer/>
     </>
   )
 }

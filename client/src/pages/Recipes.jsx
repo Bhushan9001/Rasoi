@@ -85,7 +85,7 @@ const Recipes = () => {
               recipe.cuisine.toLowerCase().includes(searchQuery.toLowerCase()) ||
               recipe.authorName.toLowerCase().includes(searchQuery.toLowerCase())
             ).map((recipe) => (
-              <Card img={recipe.imageurl} title={recipe.title} cuisine={recipe.cuisine} chef={recipe.authorName} />
+              <Card img={recipe.imageurl} title={recipe.title} cuisine={recipe.cuisine} chef={recipe.authorName} id={recipe.id}/>
             ))
           }
         </div>

@@ -43,44 +43,6 @@ const Recipes = () => {
           Delicious Discoveries
         </div>
 
-        {/* <div className='md:flex px-40 items-center justify-between'>
-          <div className='md:flex justify-center items-center mx-4 space-x-14'>
-            <div className="w-[60%] md:w-96">
-              <div class="relative mb-4 mt-5 flex items-stretch border-2  h-10 pl-4 border-solid border-[#4fd64d] rounded-md"
-              >
-                <input
-                  type="search"
-                  className='w-11/12 border-none outline-none text-xl font-barlow-condensed'
-                  placeholder="Search"
-                  aria-label="Search"
-                  aria-describedby="button-addon2"
-                  value={searchQuery}
-                  onChange={handleSearch} />
-                <img src={search} alt="" className='p-2' />
-              </div>
-              <div>
-
-              </div>
-
-            </div>
-
-            <form className="px-3">
-              <select id="underline_select" className="block w-full px-4 py-3 text-xl font-barlow-condensed bg-transparent border-0 border-b-2 border-[#4fd64d]  focus:outline-none focus:ring-0 focus:border-[#4fd64d] peer">
-                <option selected >Choose Cuisine</option>
-                <option value="">Indian</option>
-                <option value="">Italian</option>
-                <option value="">French</option>
-                <option value="">Chinese</option>
-              </select>
-              
-            </form>
-          </div>
-          <div className='flex space-x-5 py-5 justify-end'>
-            <div className='text-5xl font-semibold font-barlow-condensed text-[#228b21]'>Add Yours</div>
-            <img className='w-16 h-16 animate-bounce hover:cursor-pointer' src={plus} alt='plus' onClick={handleClick}></img>
-          </div>
-        </div> */}
-
         <div className='md:flex px-6 md:px-60 items-center justify-between'>
 
           <div className='md:flex justify-center items-center mx-4 md:mx-4 space-x-4 md:space-x-14'>
@@ -115,10 +77,6 @@ const Recipes = () => {
             <img className='w-12 h-12 md:w-16 md:h-16 animate-bounce hover:cursor-pointer' src={plus} alt='plus' onClick={handleClick} />
           </div>
         </div>
-
-
-
-
 
         <div className='flex flex-wrap justify-center'>
           {

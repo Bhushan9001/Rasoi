@@ -23,6 +23,7 @@ const Recipes = () => {
 
   return (
     <>
+    {/* <Navbar/> */}
     <div className='py-5'>
       <div className='text-5xl font-semibold font-barlow-condensed text-center py-5'>
         Delicious Discoveries
@@ -30,7 +31,7 @@ const Recipes = () => {
       <div className='flex flex-wrap justify-center'>
         {
           recipes && recipes.map((recipe) => (
-            <Card img={recipe.imageurl} title={recipe.title} cuisine={recipe.cuisine} chef={recipe.authorName} />
+            <Card img={recipe.imageurl} title={recipe.title} cuisine={recipe.cuisine} chef={recipe.authorName} id={recipe.id} />
           ))
         }
       </div>

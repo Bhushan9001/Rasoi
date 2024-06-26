@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import landingImage from '../assets/new.png';
 import landingBg from '../assets/landingBg.png';
+import { Link } from 'react-router-dom';
 
 const Landing = () => {
 
@@ -25,7 +26,7 @@ const Landing = () => {
                     </div>
                     <div className='flex justify-center items-center md:block'>
                         <button className='bg-[#68F665] px-6 md:px-10 py-3 md:py-4 font-medium font-poppins mt-5 md:mt-7 rounded-full'>
-                            Explore Now
+                            <Link to="/recipes">Explore Now</Link>
                         </button>
                     </div>
 

@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import IngredientComp from '../components/IngredientComp'
 import InstructionComp from '../components/InstructionComp'
+import { IoChevronBack } from "react-icons/io5";
+import { Link } from 'react-router-dom'
 
 const AddRecipe = () => {
 
@@ -26,10 +28,18 @@ const AddRecipe = () => {
         <>
 
             <div className='px-10 py-8'>
-                {/* <button className='bg-[#68F665] px-6 md:px-10 py-3 md:py-4 font-medium font-poppins mt-5 md:mt-7 rounded-full'>
-                    <Link to="/recipes">Back</Link>
-                </button> */}
-                <div className='md:px-20 font-barlow-condensed text-4xl font-semibold mt-3 text-[#3cc639]'>Create Your Own Recipe</div>
+
+                <div className='flex justify-center items-center space-x-10 px-5 md:px-0'>
+
+                    <Link to={"/"} className='flex justify-center items-center text-center pl-5 fixed left-0 cursor-pointer'>
+                        <IoChevronBack size={33} color={'#228b21'} />
+                        <div className='text-2xl font-barlow-condensed md:flex hidden text-[#228b21]'>Back To Home</div>
+                    </Link>
+
+                    <div className='md:px-20 font-barlow-condensed text-4xl font-semibold mt-3 text-[#228b21]'>Create Your Own Recipe</div>
+                </div>
+
+                
 
                 <div className='md:flex w-full space-x-9 my-5'>
 

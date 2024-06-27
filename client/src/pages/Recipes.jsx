@@ -40,11 +40,11 @@ const Recipes = () => {
   return (
     <>
       <div className='py-5'>
-        <div className='flex justify-center items-center'>
+        <div className='flex justify-center items-center space-x-10 px-5 md:px-0'>
 
-          <Link to={"/"} className='flex justify-center items-center text-center pl-5 fixed left-0 hover:underline cursor-pointer'>
-            <IoChevronBack size={33} />
-            <h1 className='text-2xl md:flex hidden'>Back To Home</h1>
+          <Link to={"/"} className='flex justify-center items-center text-center pl-5 fixed left-0 cursor-pointer'>
+            <IoChevronBack size={33} color={'#228b21'} />
+            <div className='text-2xl font-barlow-condensed md:flex hidden text-[#228b21]'>Back To Home</div>
           </Link>
 
           <div className='text-5xl font-semibold font-barlow-condensed text-center py-5'>

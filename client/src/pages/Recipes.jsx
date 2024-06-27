@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Card from '../components/Card'
 import axios from 'axios'
 import plus from '../assets/plus.png'
 import search from '../assets/search.png'
+import { IoChevronBack } from "react-icons/io5";
 
 const Recipes = () => {
 
@@ -39,9 +40,18 @@ const Recipes = () => {
   return (
     <>
       <div className='py-5'>
-        <div className='text-5xl font-semibold font-barlow-condensed text-center py-5'>
-          Delicious Discoveries
+        <div className='flex justify-center items-center'>
+
+          <Link to={"/"} className='flex justify-center items-center text-center pl-5 fixed left-0 hover:underline cursor-pointer'>
+            <IoChevronBack size={33} />
+            <h1 className='text-2xl md:flex hidden'>Back To Home</h1>
+          </Link>
+
+          <div className='text-5xl font-semibold font-barlow-condensed text-center py-5'>
+            Delicious Discoveries
+          </div>
         </div>
+
 
         <div className='md:flex px-6 md:px-60 items-center justify-between'>
 
@@ -85,7 +95,7 @@ const Recipes = () => {
               recipe.cuisine.toLowerCase().includes(searchQuery.toLowerCase()) ||
               recipe.authorName.toLowerCase().includes(searchQuery.toLowerCase())
             ).map((recipe) => (
-              <Card img={recipe.imageurl} title={recipe.title} cuisine={recipe.cuisine} chef={recipe.authorName} id={recipe.id}/>
+              <Card img={recipe.imageurl} title={recipe.title} cuisine={recipe.cuisine} chef={recipe.authorName} id={recipe.id} />
             ))
           }
         </div>

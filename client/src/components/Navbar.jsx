@@ -3,11 +3,25 @@ import boy from '../assets/boy.png';
 import logo from '../assets/logo.png';
 import { Link } from 'react-router-dom';
 import { Link as Scroll } from 'react-scroll';
+import { useRecoilValue } from 'recoil';
+import { userAtom } from '../atoms/userAtom';
+import LetteredAvatar from 'react-lettered-avatar';
 
 const Navbar = () => {
   
   const [isOpen, setIsOpen] = useState(false);
   const [loggedIn , setLoggedIn] = useState(false);
+  const user = useRecoilValue(userAtom);
+  const defaultColors = [
+    "#2ecc71",
+    "#3498db",
+    "#8e44ad",
+    "#e67e22",
+    "#e74c3c",
+    "#1abc9c",
+    "#2c3e50"
+  ];
+  
   useEffect(()=>{
       const token = localStorage.getItem("token");
       if(token) setLoggedIn(true)
@@ -71,9 +85,12 @@ const Navbar = () => {
           Login
         </Link> 
          }
-          <div>
+         {
+            loggedIn&&user.name ? <LetteredAvatar name={user.name} backgroundColors={defaultColors}/>: <div>
             <img className="w-10 h-10" src={boy} alt="Landing" />
           </div>
+         }
+         
         </div>
       </div>
       <div className={`${isOpen ? 'block' : 'hidden'} md:hidden mt-4`}>

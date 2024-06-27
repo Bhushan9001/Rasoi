@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import dosa from '../assets/dosa.png';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { IoChevronBack } from "react-icons/io5";
+import { userAtom } from '../atoms/userAtom';
 
 const RecipeDetail = () => {
-
+  
+  // const user = useRecoilValue(userAtom);
   const [recipe, setRecipe] = useState({})
   const { id } = useParams();
   useEffect(() => {
@@ -34,7 +37,13 @@ const RecipeDetail = () => {
 const daysSinceCreated = calculateDaysSinceCreated(recipe.createdAt);
 
   return (
-    <div className='md:flex w-full'>
+    <div className='md:flex w-full '> 
+    
+      
+      <Link to={"/"} className='flex justify-center items-center text-center pl-5  hover:underline cursor-pointer left-0 fixed'>
+          <IoChevronBack size={33}/>
+          <h1 className='text-2xl md:flex hidden'>Back To Recipes</h1>
+      </Link>
       <div className='px-6 md:px-12 py-7 w-full md:w-2/6'>
         <div className='font-semibold text-5xl font-barlow-condensed text-[#037800]'>
           {recipe.title}

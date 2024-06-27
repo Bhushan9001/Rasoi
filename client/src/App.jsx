@@ -9,12 +9,12 @@ import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Recipes from "./pages/Recipes";
 import AddRecipe from "./pages/AddRecipe";
+import { RecoilRoot } from "recoil";
 
 const App = ()=>{
   return(
-    <>
-     {/* <Navbar/> */}
-     <Routes>
+    
+       <Routes>
        <Route path="/" element={<HomePage/>}/>
        <Route path="/recipes/:id" element={<RecipeDetail/>}/>
        <Route path="/recipes/" element={<Recipes/>}/>
@@ -22,7 +22,7 @@ const App = ()=>{
        <Route path="/signin" element={<Signin/>}/>
        <Route path="/addrecipe" element={<AddRecipe/>}/>
      </Routes>   
-    </>
+    
   )
 }
 

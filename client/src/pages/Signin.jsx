@@ -2,18 +2,25 @@ import InputElement from "../components/InputElement";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState, useSetRecoilState} from "recoil";
+import { userAtom } from "../atoms/userAtom";
 const Signin = () => {
   const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [user,setUser] = useRecoilState(userAtom);
+
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
     console.log(email);
   };
+
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
     console.log(password);
   };
+
   const login = async (e) => {
     e.preventDefault();
     try {
@@ -22,7 +29,9 @@ const Signin = () => {
         password: password,
       });
       if (response) {
-        console.log(response);
+        
+        setUser(response.data.user);
+        
         localStorage.setItem("token",response.data.token);
         navigate("/")
       }
@@ -30,7 +39,7 @@ const Signin = () => {
       console.log(error);
     }
   };
-
+  
   return (
     <>
       <div className="h-screen flex items-center justify-center bg-white/50">

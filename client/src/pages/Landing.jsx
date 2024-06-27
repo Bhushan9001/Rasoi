@@ -14,11 +14,11 @@ const Landing = () => {
                 <div className='w-full md:w-1/2 flex justify-center p-7 '>
                     <div className='bg-[#9BFB99] w-36 md:w-44 h-60 md:h-72 animate__animated animate__rotateInDownLeft'></div>
                     <img className='w-60 md:w-72 h-64 md:h-80 -ml-12 md:-ml-24 mt-8 z-20 animate__animated animate__slideInDown' src={landingImage} alt='Landing' />
-                    <div className='bg-[#B6B8B6] w-40 md:w-52 h-40 md:h-52 -ml-20 md:-ml-32 mt-48 -z-0 animate__animated animate__rotateInDownRight'></div>
+                    <div className='bg-[#B6B8B6] w-40 md:w-52 h-40 md:h-52 -ml-20 md:-ml-32 mt-48 -z-0 md:animate__animated md:animate__rotateInDownRight'></div>
                 </div>
 
                 <div className='w-full md:w-1/2 pt-8 md:pt-48 pb-8 md:pb-48 px-4 md:pr-60 text-center md:text-left'>
-                    <div className='text-4xl md:text-6xl font-semibold pb-6 md:pb-10 font-barlow-condensed animate__animated animate__fadeInRight'>
+                    <div className='text-4xl md:text-6xl font-semibold pb-6 md:pb-10 font-barlow-condensed md:animate__animated md:animate__fadeInRight'>
                         The secret ingredient is always love.
                     </div>
                     <div className='font-poppins font-normal text-sm md:text-xl'>

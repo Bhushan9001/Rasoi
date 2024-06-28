@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import add from '../assets/add.png'
 
-const InstructionComp = () => {
-  const [instructions, setInstructions] = useState(['']);
+const InstructionComp = ({instructions,setInstructions}) => {
+  
 
   const handleChange = (index, value) => {
     const newInstruction = [...instructions];
     newInstruction[index] = value;
     setInstructions(newInstruction);
   };
-
+  
   const handleAddInstructionField = () => {
     setInstructions([...instructions, '']);
   };

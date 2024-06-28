@@ -40,12 +40,14 @@ const Recipes = () => {
   return (
     <>
       <div className='py-5'>
-        <div className='flex justify-center items-center space-x-10 px-5 md:px-0'>
+        <div className='flex justify-start items-center space-x-10 px-5 md:px-0'>
 
-          <Link to={"/"} className='flex justify-center items-center text-center pl-5 fixed left-0 cursor-pointer'>
+          <Link to={"/"} className='flex justify-start items-center text-center pl-5 cursor-pointer'>
             <IoChevronBack size={33} color={'#228b21'} />
             <div className='text-2xl font-barlow-condensed md:flex hidden text-[#228b21]'>Back To Home</div>
           </Link>
+           <div className='w-80 hidden md:flex'></div>
+          
 
           <div className='text-5xl font-semibold font-barlow-condensed text-center py-5'>
             Delicious Discoveries

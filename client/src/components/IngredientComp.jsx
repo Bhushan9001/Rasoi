@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import add from '../assets/add.png'
 
-const IngredientComp = () => {
-  const [ingredients, setIngredients] = useState([{ name: '', quantity: '' }]);
+const IngredientComp = ({ingredients,setIngredients}) => {
+  
 
   const handleChange = (index, field, value) => {
     const newIngredients = [...ingredients];
@@ -16,7 +16,7 @@ const IngredientComp = () => {
   };
 
   console.log(ingredients)
-
+  
   return (
     <div className=''>
       {ingredients.map((ingredient, index) => (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import IngredientComp from '../components/IngredientComp'
 import InstructionComp from '../components/InstructionComp'
 import { IoChevronBack } from "react-icons/io5";
@@ -8,6 +8,12 @@ const AddRecipe = () => {
 
 
     const [image, setImage] = useState(null);
+    const [cuisine,setCuisine]=useState("");
+    const [title,setTitle] = useState("");
+    const [type,setType] = useState("");
+    const [description,setDescription] = useState("");
+    const [instruction, setInstructions] = useState(['']);
+    const [ingredients, setIngredients] = useState([{ name: '', quantity: '' }]);
 
     const handleImageUpload = (event) => {
         const file = event.target.files[0];
@@ -23,6 +29,19 @@ const AddRecipe = () => {
     const handleChangeClick = () => {
         document.getElementById('dropzone-file').click();
     };
+
+    
+        const submitRecipes = async () => {
+            try {
+              const response = await axios.post('http://localhost:8080/recipe/addRecipe',{title,description,type,cuisine,instruction,ingredients,image});
+              console.log(response.data)
+            } catch (error) {
+              console.error('Error fetching recipes:', error);
+            }
+          };
+      
+
+
 
     return (
         <>
@@ -94,23 +113,42 @@ const AddRecipe = () => {
                         <div className='w-full md:w-1/2'>
                             <div className='py-2 md:pb-1'>
                                 <div className='font-barlow-condensed text-2xl py-2 font-medium'>Recipe Title</div>
-                                <input type="text" className="font-barlow-condensed px-1 py-2 border-b-2 border-[#83f181] outline-none w-[70%] text-2xl" placeholder="Title" required />
+                                <input type="text" className="font-barlow-condensed px-1 py-2 border-b-2 border-[#83f181] outline-none w-[70%] text-2xl" 
+                                placeholder="Title" 
+                                required
+                                onChange={(e)=>{setTitle(e.target.value)}}/>
                             </div>
 
                             <div className='py-2 md:py-1'>
                                 <div className='font-barlow-condensed text-2xl py-2 font-medium'>Cuisine</div>
-                                <input type="text" className="font-barlow-condensed px-1 py-2 border-b-2 border-[#83f181] outline-none w-[70%] text-2xl" placeholder="Indian ,Italian ,etc.." required />
+                                <input type="text" 
+                                className="font-barlow-condensed px-1 py-2 border-b-2 border-[#83f181] outline-none w-[70%] text-2xl" 
+                                placeholder="Indian ,Italian ,etc.." 
+                                required 
+                                onChange={(e)=>{setCuisine(e.target.value)}}
+                                />
                             </div>
 
                             <div className='py-2 md:py-1'>
                                 <div className='font-barlow-condensed text-2xl py-2 font-medium'>Type</div>
-                                <input type="text" className="font-barlow-condensed px-1 py-2 border-b-2 border-[#83f181] outline-none w-[70%] text-2xl" placeholder="Breakfast ,Lunch ,etc.." required />
+                                <input type="text" 
+                                className="font-barlow-condensed px-1 py-2 border-b-2 border-[#83f181] outline-none w-[70%] text-2xl" 
+                                placeholder="Breakfast ,Lunch ,etc.." 
+                                required 
+                                onChange={(e)=>{setType(e.target.value)}}
+                                />
                             </div>
                         </div>
 
                         <div className='py-2 md:py-1 w-full md:w-1/2'>
                             <div className='font-barlow-condensed text-2xl py-2 font-medium'>Description</div>
-                            <textarea type="textarea" rows="5" className="font-barlow-condensed px-1 py-2 border-b-2 border-[#83f181] outline-none w-[70%] text-2xl" placeholder="Description" required />
+                            <textarea type="textarea" 
+                            rows="5" 
+                            className="font-barlow-condensed px-1 py-2 border-b-2 border-[#83f181] outline-none w-[70%] text-2xl" 
+                            placeholder="Description" 
+                            required 
+                            onChange={(e)=>{setDescription(e.target.value)}}
+                            />
                         </div>
 
                     </div>
@@ -122,7 +160,7 @@ const AddRecipe = () => {
                             Add Ingredients
                         </div>
 
-                        <IngredientComp />
+                        <IngredientComp ingredients={ingredients} setIngredients={setIngredients}/>
 
                     </div>
 
@@ -131,7 +169,7 @@ const AddRecipe = () => {
                             Instructions
                         </div>
 
-                        <InstructionComp />
+                        <InstructionComp instructions={instruction} setInstructions={setInstructions}/>
 
                     </div>
                 </div>

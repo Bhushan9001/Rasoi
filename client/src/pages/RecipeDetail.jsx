@@ -163,7 +163,7 @@ const RecipeDetail = () => {
                 className='bg-[#68F665] font-poppins rounded-full text-sm px-4 py-2 font-medium'
                 onClick={handleSubmit}
               >
-                Submit
+                Comment
               </button>
             </div>
           ) : (

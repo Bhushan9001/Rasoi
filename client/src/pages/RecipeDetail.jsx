@@ -62,9 +62,9 @@ const RecipeDetail = () => {
 
   return (
     <>
-      <Link to={"/"} className='flex justify-start items-center text-center pl-5 cursor-pointer pt-7'>
+      <Link to={"/recipes"} className='flex justify-start items-center text-center pl-5 cursor-pointer pt-7'>
         <IoChevronBack size={33} color={'#228b21'} />
-        <div className='text-2xl font-barlow-condensed md:flex hidden text-[#228b21]'>Back To Home</div>
+        <div className='text-2xl font-barlow-condensed md:flex hidden text-[#228b21]'>Back To Recipes</div>
       </Link>
 
       <div className='md:flex w-full '>
@@ -84,7 +84,7 @@ const RecipeDetail = () => {
           </div>
 
 
-          <img className='mt-8 my-6 w-96 md:w-[95%] h-60 rounded-xl' src={recipe.imageurl} alt='Dosa' />
+          <img className='mt-8 my-6 w-96 md:w-[95%] h-60 md:h-96 rounded-xl' src={recipe.imageurl} alt='Dosa' />
 
         </div>
 

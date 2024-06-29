@@ -12,6 +12,7 @@ const commentController = {
                     text,
                     recipe: { connect: { id: recipeId } },
                     author: { connect: { id: authorId } },
+                    likes:0,
                 }
             })
 
@@ -34,6 +35,49 @@ const commentController = {
             .catch((e)=>{
                 res.status(400).json({"Message":"Error While Deleteing Comment",e});
             })
+
+        } catch (error) {
+            console.log(error);
+            res.status(501).json({"Message":"Internal Server Error",error});
+        }
+    },
+    likeComment: async(req,res)=>{
+       try {
+        const {commentId} = req.params;
+        const {recipeId} = req.params;
+        const updatedComment = await prisma.comments.update({
+            where:{id:commentId,
+                recipeId:recipeId},
+            data:{
+                likes:{
+                    increment: 1,
+                }
+            }
+        })
+         res.status(201).json({"message":"Liked a Comment",updatedComment});
+       } catch (error) {
+        console.log(error);
+        res.status(501).json({"Message":"Internal Server Error",error});
+       }
+    },
+    replyOnComment : async(req,res)=>{
+        try {
+            const{recipeId,commentId} = req.params;
+            const {reply} = req.body;
+            
+            const updatedComment = await prisma.comments.update({
+                where:{id:commentId , recipeId:recipeId},
+                data:{
+                    replies:{
+                        push:{
+                            text:reply,
+                            authorName: req.user.name
+                        }
+                    }
+                }
+            })
+
+            res.status(201).json({"Message":"Reply Added Succesfully",updatedComment});
 
         } catch (error) {
             console.log(error);

@@ -2,8 +2,16 @@ import React, { useState } from 'react'
 import boy from '../assets/boy.png';
 import like from '../assets/like.png';
 import liked from '../assets/liked.png';
+import ReplyComp from './ReplyComp';
 
 const CommentComp = () => {
+
+    const [reply, setReply] = useState(false)
+
+    const handleReply = () => {
+        setReply(!reply)
+    }
+
     const [L_flag, setL_Flag] = useState(false)
 
     const handleLike = () => {
@@ -58,13 +66,22 @@ const CommentComp = () => {
                         </div>
 
                         <div>
-                            <div className='hover:bg-[#c7c6c6] hover:cursor-pointer px-2 py-1 rounded-[10%] text-sm'>Reply</div>
+                            <div onClick={handleReply} className='hover:bg-[#c7c6c6] hover:cursor-pointer px-2 py-1 rounded-[10%] text-sm'>Reply</div>
+
                         </div>
+
                     </div>
 
                 </div>
 
 
+
+            </div>
+
+            <div className='flex w-[60%] md:ps-44'>
+                {
+                    reply === true ? (<ReplyComp />) : (<></>)
+                }
             </div>
 
         </div>

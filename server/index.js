@@ -10,6 +10,7 @@ const recipeRoutes = require('./src/routes/recipeRoutes');
 const commentRoutes = require('./src/routes/commentRoutes');
 const path = require('path');
 
+require('dotenv').config();
 
 const app = express();
 

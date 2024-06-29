@@ -5,6 +5,11 @@ import liked from '../assets/liked.png';
 import ReplyComp from './ReplyComp';
 
 const CommentComp = ({name,text,likes,days}) => {
+    const [reply,setReply]=useState(false)
+
+    const handleReply=()=>{
+        setReply(!reply)
+    }
     const [L_flag, setL_Flag] = useState(false)
 
     const handleLike = () => {

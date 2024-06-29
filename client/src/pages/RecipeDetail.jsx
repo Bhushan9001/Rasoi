@@ -58,6 +58,7 @@ const RecipeDetail = () => {
   };
 
   const daysSinceCreated = calculateDaysSinceCreated(recipe.createdAt);
+  
 
   return (
     <>
@@ -170,10 +171,10 @@ const RecipeDetail = () => {
           )}
         </div>
 
-
-        <CommentComp />
-        <CommentComp />
-        <CommentComp />
+        {recipe && Array.isArray(recipe.comments) && recipe.comments.map((comment) => {
+                  return <CommentComp name ={comment.author.name} text = {comment.text} likes = {comment.likes} days={calculateDaysSinceCreated(comment.createdAt)}/>
+                })}
+       
       </div>
 
 

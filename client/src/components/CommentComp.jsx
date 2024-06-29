@@ -3,7 +3,7 @@ import boy from '../assets/boy.png';
 import like from '../assets/like.png';
 import liked from '../assets/liked.png';
 
-const CommentComp = () => {
+const CommentComp = ({name,text,likes,days}) => {
     const [L_flag, setL_Flag] = useState(false)
 
     const handleLike = () => {
@@ -23,11 +23,11 @@ const CommentComp = () => {
                 <img className="w-10 h-10" src={boy} alt="avatar" />
                 <div>
                     <div className='flex space-x-3 items-center'>
-                        <div className='text-base '>Bhushan Pawar</div>
-                        <div className='text-[#686767] text-sm'>2 weeks ago</div>
+                        <div className='text-base '>{name}</div>
+                        <div className='text-[#686767] text-sm'>{days} days ago</div>
                     </div>
-
-                    <div className='text-xl font-normal'>Delicious! The flavors really came together nicely.</div>
+                     
+                    <div className='text-xl font-normal'>{text}.</div>
 
                     <div className='py-2 flex space-x-4'>
                         <div>
@@ -35,7 +35,7 @@ const CommentComp = () => {
                                 L_flag === false ? (
                                     <div className='flex space-x-1'>
                                         <img className="w-6 h-6 hover:cursor-pointer" src={like} onClick={handleLike} alt="like" />
-                                        <span className='text-[#686767]'>20k</span>
+                                        <span className='text-[#686767]'>{likes}</span>
                                     </div>
                                 ) : (
                                     <div className='flex space-x-1'>

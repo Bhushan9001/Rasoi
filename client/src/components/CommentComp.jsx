@@ -8,8 +8,15 @@ const CommentComp = ({ name, text, likes, days, replies, addReply }) => {
     const [reply, setReply] = useState(false);
 
     const handleReply = () => {
-        scrollY;
         setReply(!reply);
+        if (!reply) {
+            setTimeout(() => {
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth',
+                });
+            }, 100); 
+        }
     };
 
     const [L_flag, setL_Flag] = useState(false);

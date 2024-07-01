@@ -139,7 +139,7 @@ const RecipeDetail = () => {
           125 &nbsp;Comments
         </div>
 
-        <div className='py-5 flex flex-col space-y-2'>
+        <div className='pt-6 pb-3 flex flex-col space-y-2'>
           <div className='flex space-x-4'>
             <img className="w-10 h-10" src={boy} alt="avatar" />
             <input
@@ -172,7 +172,7 @@ const RecipeDetail = () => {
         </div>
 
         {recipe && Array.isArray(recipe.comments) && recipe.comments.map((comment) => {
-                  return <CommentComp name ={comment.author.name} text = {comment.text} likes = {comment.likes} days={calculateDaysSinceCreated(comment.createdAt)}/>
+                  return <CommentComp name ={comment.author.name} text = {comment.text} likes = {comment.likes} days={calculateDaysSinceCreated(comment.createdAt)}replies={comment.replies}/>
                 })}
        
       </div>

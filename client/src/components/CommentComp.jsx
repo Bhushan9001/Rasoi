@@ -8,6 +8,7 @@ const CommentComp = ({ name, text, likes, days, replies, addReply }) => {
     const [reply, setReply] = useState(false);
 
     const handleReply = () => {
+        scrollY;
         setReply(!reply);
     };
 
@@ -25,7 +26,7 @@ const CommentComp = ({ name, text, likes, days, replies, addReply }) => {
 
     return (
         <>
-            <div className='flex space-x-5 items-center w-full md:w-[60%] font-poppins'>
+            <div className='pb-3 flex space-x-5 items-center w-full md:w-[60%] font-poppins'>
                 <img className="w-10 h-10" src={boy} alt="avatar" />
                 <div>
                     <div className='flex space-x-3 items-center'>
@@ -67,7 +68,7 @@ const CommentComp = ({ name, text, likes, days, replies, addReply }) => {
                 {reply && <ReplyComp addReply={addReply} />}
             </div>
 
-            {replies && replies.length > 0 && (
+            {reply && replies && replies.length > 0 && (
                 <div className='flex flex-col space-y-4 ps-14 md:ps-24 font-poppins'>
                     {replies.map((reply, index) => (
                         <div key={index} className='flex space-x-4 py-3'>

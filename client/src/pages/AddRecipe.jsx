@@ -16,15 +16,16 @@ const AddRecipe = () => {
     const [instruction, setInstructions] = useState(['']);
     const [ingredients, setIngredients] = useState([{ name: '', quantity: '' }]);
     const token = localStorage.getItem('token');
-
+    const [file, setFile] = useState(null);
     const handleImageUpload = (event) => {
-        const file = event.target.files[0];
-        if (file) {
+        setFile(event.target.files[0]);
+        const droppedFile = event.target.files[0];
+        if (droppedFile) {
             const reader = new FileReader();
             reader.onloadend = () => {
                 setImage(reader.result);
             };
-            reader.readAsDataURL(file);
+            reader.readAsDataURL(droppedFile);
         }
     };
 
@@ -32,25 +33,27 @@ const AddRecipe = () => {
         document.getElementById('dropzone-file').click();
     };
 
-    const formData = new FormData();
-    formData.append('image',image);
-    formData.append('title',title);
-    formData.append('type',type);
-    formData.append('cuisine',cuisine);
-    formData.append('description',description);
-    formData.append('instruction',instruction);
-    formData.append('ingredients',ingredients);
+
 
 
 
 
     const submitRecipes = async (e) => {
         e.preventDefault();
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('title', title);
+        formData.append('type', type);
+        formData.append('cuisine', cuisine);
+        formData.append('description', description);
+        formData.append('instruction', instruction);
+        formData.append('ingredients', ingredients);
+
         try {
-            const response = await axios.post('http://localhost:8080/recipe/addRecipe',formData,{
-                headers:{
-                    'Content-Type':'multipart/form-data',
-                    'Authorization':token
+            const response = await axios.post('http://localhost:8080/recipe/addRecipe', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': token
                 }
             });
             console.log(response.data)

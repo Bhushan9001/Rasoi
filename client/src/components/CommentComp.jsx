@@ -11,12 +11,8 @@ const CommentComp = ({ name, text, likes, days, replies, addReply }) => {
     const [repliess, setReplies] = useState(false);
 
     const visibleReplies = () => {
-        setReplies(!repliess)
-    }
-
-    const handleReply = () => {
-        setReply(!reply);
-        if (!reply) {
+        setReplies(!repliess);
+        if (!replies) {
             setTimeout(() => {
                 window.scrollTo({
                     top: document.body.scrollHeight,
@@ -24,6 +20,11 @@ const CommentComp = ({ name, text, likes, days, replies, addReply }) => {
                 });
             }, 100); 
         }
+    }
+
+    const handleReply = () => {
+        setReply(!reply);
+        
     };
 
     const [L_flag, setL_Flag] = useState(false);
@@ -84,16 +85,17 @@ const CommentComp = ({ name, text, likes, days, replies, addReply }) => {
 
             {
                 replies.length > 0 && (
-                    <div className='mt-4 mb-2 md:mb-3 md:my-1 py-2 flex hover:cursor-pointer ms-14 md:ms-24 pe-3 text-[20px] rounded-full justify-center items-center w-[50%] md:w-[8%] hover:bg-[#c7f7c6] font-semibold font-poppins text-[#428C41]'>
+                    <div onClick={visibleReplies} className='mt-4 mb-2 md:mb-3 md:my-1 py-2 flex hover:cursor-pointer ms-14 md:ms-24 pe-3 text-[20px] rounded-full justify-center items-center w-[50%] md:w-[10%] hover:bg-[#c7f7c6] font-semibold font-poppins text-[#428C41]'>
                         {
                             repliess===true ? (
-                                <MdOutlineKeyboardArrowDown size={30}/>
-                            ):(
                                 <MdOutlineKeyboardArrowUp size={30}/>
+                            ):(
+                                <MdOutlineKeyboardArrowDown size={30}/>
+                                
                             )
                         }
                         
-                        <div onClick={visibleReplies} className=''> {replies.length} replies</div>
+                        <div> {replies.length} replies</div>
                     </div>
                 )
             }

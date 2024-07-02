@@ -12,7 +12,10 @@ const RecipeDetail = () => {
 
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const [recipe, setRecipe] = useState({})
+  const { id } = useParams();
   const user = useRecoilValue(userAtom);
+  const imageurl = `http://localhost:8080${recipe.imageurl}`;
 
   const handleFocus = () => {
     setIsFocused(true);
@@ -34,8 +37,7 @@ const RecipeDetail = () => {
   };
 
   // const user = useRecoilValue(userAtom);
-  const [recipe, setRecipe] = useState({})
-  const { id } = useParams();
+  
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
@@ -87,7 +89,7 @@ const RecipeDetail = () => {
           </div>
 
 
-          <img className='mt-8 my-6 w-96 md:w-[95%] h-60 md:h-96 rounded-xl' src={recipe.imageurl} alt='Dosa' />
+          <img className='mt-8 my-6 w-96 md:w-[95%] h-60 md:h-96 rounded-xl' src={imageurl} alt='Dosa' />
 
         </div>
 

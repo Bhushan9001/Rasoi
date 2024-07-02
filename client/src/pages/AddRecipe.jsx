@@ -13,7 +13,7 @@ const AddRecipe = () => {
     const [title, setTitle] = useState("");
     const [type, setType] = useState("");
     const [description, setDescription] = useState("");
-    const [instruction, setInstructions] = useState(['']);
+    const [instructions, setInstructions] = useState(['']);
     const [ingredients, setIngredients] = useState([{ name: '', quantity: '' }]);
     const token = localStorage.getItem('token');
     const [file, setFile] = useState(null);
@@ -34,20 +34,27 @@ const AddRecipe = () => {
     };
 
 
-
+    
 
 
 
     const submitRecipes = async (e) => {
         e.preventDefault();
         const formData = new FormData();
-        formData.append('file', file);
+        formData.append('image', file);
         formData.append('title', title);
         formData.append('type', type);
         formData.append('cuisine', cuisine);
         formData.append('description', description);
-        formData.append('instruction', instruction);
-        formData.append('ingredients', ingredients);
+        // formData.append('instruction', instruction);
+        instructions.forEach((instruction, index) => {
+            formData.append(`instruction[${index}]`, instruction);
+          });
+        // formData.append('ingredients', ingredients);
+        ingredients.forEach((ingredient, index) => {
+            formData.append(`ingredients[${index}][name]`, ingredient.name);
+            formData.append(`ingredients[${index}][quantity]`, ingredient.quantity);
+          });
 
         try {
             const response = await axios.post('http://localhost:8080/recipe/addRecipe', formData, {
@@ -191,7 +198,7 @@ const AddRecipe = () => {
                                 Instructions
                             </div>
 
-                            <InstructionComp instructions={instruction} setInstructions={setInstructions} />
+                            <InstructionComp instructions={instructions} setInstructions={setInstructions} />
 
                         </div>
                     </div>

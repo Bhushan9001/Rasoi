@@ -6,6 +6,7 @@ const recipeController = {
     try {
       const { title, description, type, cuisine, instruction, ingredients } = req.body;
       console.log(req.body);
+      const imageurl = req.file ? `/images/${req.body.filename}`:" ";
       const authorId = req.user.id;
       const createdRecipe = await prisma.recipe.create({
         data: {
@@ -15,7 +16,7 @@ const recipeController = {
           cuisine,
           instruction: instruction,
           ingredients: ingredients,
-          imageurl: req.file.path,
+          imageurl: imageurl,
           author: { connect: { id: authorId } },
           authorName: req.user.name,
         }

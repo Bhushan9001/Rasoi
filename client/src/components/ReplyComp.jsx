@@ -30,7 +30,7 @@ const ReplyComp = ({ addReply }) => {
     };
 
     return (
-        <div className='py-2 flex flex-col space-y-2 w-full'>
+        <div className='pt-2 flex flex-col space-y-2 w-full'>
             <div className='flex space-x-4'>
             {user ? <Avatar name={user}/>: <div>
             <img className="w-10 h-10" src={boy} alt="Landing" />

@@ -4,9 +4,15 @@ import like from '../assets/like.png';
 import liked from '../assets/liked.png';
 import ReplyComp from './ReplyComp';
 import Avatar from './Avatar';
+import { MdOutlineKeyboardArrowDown,MdOutlineKeyboardArrowUp } from "react-icons/md";
 
 const CommentComp = ({ name, text, likes, days, replies, addReply }) => {
     const [reply, setReply] = useState(false);
+    const [repliess, setReplies] = useState(false);
+
+    const visibleReplies = () => {
+        setReplies(!repliess)
+    }
 
     const handleReply = () => {
         setReply(!reply);
@@ -76,7 +82,39 @@ const CommentComp = ({ name, text, likes, days, replies, addReply }) => {
                 {reply && <ReplyComp addReply={addReply} />}
             </div>
 
-            {reply && replies && replies.length > 0 && (
+            {
+                replies.length > 0 && (
+                    <div className='mt-4 mb-2 md:mb-3 md:my-1 py-2 flex hover:cursor-pointer ms-14 md:ms-24 pe-3 text-[20px] rounded-full justify-center items-center w-[50%] md:w-[8%] hover:bg-[#c7f7c6] font-semibold font-poppins text-[#428C41]'>
+                        {
+                            repliess===true ? (
+                                <MdOutlineKeyboardArrowDown size={30}/>
+                            ):(
+                                <MdOutlineKeyboardArrowUp size={30}/>
+                            )
+                        }
+                        
+                        <div onClick={visibleReplies} className=''> {replies.length} replies</div>
+                    </div>
+                )
+            }
+
+            {
+                repliess === true && (
+                    <div className='flex flex-col space-y-4 ps-14 md:ps-24 font-poppins'>
+                        {replies.map((reply, index) => (
+                            <div key={index} className='flex space-x-4 py-3'>
+                                <Avatar name={reply.authorName}/>
+                                <div className='w-[80%] md:w-[60%]'>
+                                    <div className='text-base'>{reply.authorName}</div>
+                                    <div className='text-xl'>{reply.text}</div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )
+            }
+
+            {/* {reply && replies && replies.length > 0 && (
                 <div className='flex flex-col space-y-4 ps-14 md:ps-24 font-poppins'>
                     {replies.map((reply, index) => (
                         <div key={index} className='flex space-x-4 py-3'>
@@ -88,7 +126,7 @@ const CommentComp = ({ name, text, likes, days, replies, addReply }) => {
                         </div>
                     ))}
                 </div>
-            )}
+            )} */}
 
         </>
     );

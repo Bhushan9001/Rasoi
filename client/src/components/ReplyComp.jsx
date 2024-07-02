@@ -3,11 +3,13 @@ import boy from '../assets/boy.png';
 import Avatar from './Avatar';
 import { useRecoilValue } from 'recoil';
 import { userAtom } from '../atoms/userAtom';
-const ReplyComp = ({ addReply }) => {
+import axios from 'axios';
+const ReplyComp = ({ recipeId , commentsId }) => {
     const [isFocused, setIsFocused] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const user = useRecoilValue(userAtom);
-
+    const token = localStorage.getItem('token');
+    console.log(recipeId,commentsId);
     const handleFocus = () => {
         setIsFocused(true);
     };
@@ -21,14 +23,17 @@ const ReplyComp = ({ addReply }) => {
         setInputValue(e.target.value);
     };
 
-    const handleSubmit = () => {
-        if (inputValue.trim()) {
-            addReply({ text: inputValue, authorName: 'Current User' });
-            setIsFocused(false);
-            setInputValue('');
-        }
+    const handleSubmit = async() => {
+        const response = await axios.put(`http://localhost:8080/recipes/${recipeId}/comments/${commentsId}/addReply`,{reply:inputValue},{
+            headers:{
+                'Authorization': token,
+            }
+        })
+        console.log(response);
+        setIsFocused(false);
+        setInputValue('');
     };
-
+    
     return (
         <div className='pt-2 flex flex-col space-y-2 w-full'>
             <div className='flex space-x-4'>

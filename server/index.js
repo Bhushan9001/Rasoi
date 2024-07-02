@@ -25,9 +25,9 @@ app.post("/",(req,res)=>{
     res.send(req.body.email);
 })
 
-app.use("/user",userRoutes);
-app.use("/recipe",recipeRoutes);
-app.use("/recipe",commentRoutes);
+app.use("/users",userRoutes);
+app.use("/recipes",recipeRoutes);
+app.use("/recipes",commentRoutes);
 
 
 

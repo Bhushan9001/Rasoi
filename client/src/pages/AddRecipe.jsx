@@ -57,7 +57,7 @@ const AddRecipe = () => {
           });
 
         try {
-            const response = await axios.post('http://localhost:8080/recipe/addRecipe', formData, {
+            const response = await axios.post('http://localhost:8080/recipes', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': token

@@ -16,6 +16,7 @@ const RecipeDetail = () => {
   const { id } = useParams();
   const user = useRecoilValue(userAtom);
   const imageurl = `http://localhost:8080${recipe.imageurl}`;
+  const token = localStorage.getItem('token');
 
   const handleFocus = () => {
     setIsFocused(true);
@@ -30,26 +31,32 @@ const RecipeDetail = () => {
     setInputValue(e.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async() => {
     console.log('Comment submitted');
+    const response = await axios.post(`http://localhost:8080/recipes/${recipe.id}/comments`,{text:inputValue},{
+      headers:{
+        'Authorization': token,
+      }
+    })
+    console.log(response.data);
     setIsFocused(false);
     setInputValue('');
+    fetchRecipes();
   };
 
   // const user = useRecoilValue(userAtom);
-  
-  useEffect(() => {
-    const fetchRecipes = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8080/recipe/getRecipes/${id}`);
-        if (response.data) {
-          console.log(response.data.recipe);
-          setRecipe(response.data.recipe);
-        }
-      } catch (error) {
-        console.error('Error fetching recipe:', error);
+  const fetchRecipes = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/recipes/${id}`);
+      if (response.data) {
+        console.log(response.data.recipe);
+        setRecipe(response.data.recipe);
       }
-    };
+    } catch (error) {
+      console.error('Error fetching recipe:', error);
+    }
+  };
+  useEffect(() => {
 
     fetchRecipes();
   }, [])
@@ -179,7 +186,7 @@ const RecipeDetail = () => {
         </div>
 
         {recipe && Array.isArray(recipe.comments) && recipe.comments.map((comment,index) => {
-                  return <CommentComp key={index} name ={comment.author.name} text = {comment.text} likes = {comment.likes} days={calculateDaysSinceCreated(comment.createdAt)}replies={comment.replies}/>
+                  return <CommentComp key={index} name ={comment.author.name} text = {comment.text} likes = {comment.likes} days={calculateDaysSinceCreated(comment.createdAt)}replies={comment.replies} id={comment.id} recipeId={recipe.id}/>
                 })}
        
       </div>

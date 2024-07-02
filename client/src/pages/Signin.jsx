@@ -9,7 +9,7 @@ const Signin = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user,setUser] = useRecoilState(userAtom);
+  
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -30,9 +30,10 @@ const Signin = () => {
       });
       if (response) {
         
-        setUser(response.data.user);
+        
         
         localStorage.setItem("token",response.data.token);
+        localStorage.setItem("name",response.data.user.name);
         navigate("/")
       }
     } catch (error) {

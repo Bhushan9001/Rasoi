@@ -3,27 +3,19 @@ import boy from '../assets/boy.png';
 import logo from '../assets/logo.png';
 import { Link } from 'react-router-dom';
 import { Link as Scroll } from 'react-scroll';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { userAtom } from '../atoms/userAtom';
-import LetteredAvatar from 'react-lettered-avatar';
+import Avatar from './Avatar';
 
 const Navbar = () => {
   
   const [isOpen, setIsOpen] = useState(false);
   const [loggedIn , setLoggedIn] = useState(false);
-  const user = useRecoilValue(userAtom);
-  const defaultColors = [
-    "#2ecc71",
-    "#3498db",
-    "#8e44ad",
-    "#e67e22",
-    "#e74c3c",
-    "#1abc9c",
-    "#2c3e50"
-  ];
+  const [user,setUser] = useRecoilState(userAtom);
   
   useEffect(()=>{
       const token = localStorage.getItem("token");
+      setUser(localStorage.getItem("name"));
       if(token) setLoggedIn(true)
       else setLoggedIn(false)
   },[])
@@ -77,7 +69,7 @@ const Navbar = () => {
         <div className="hidden md:flex items-center space-x-5 font-poppins font-normal text-xl">
          {
           loggedIn?<Link to="/" className="" onClick={()=>{
-          localStorage.removeItem('token');
+          localStorage.clear();
           setLoggedIn(false);
         }}>
             Logout
@@ -86,7 +78,7 @@ const Navbar = () => {
         </Link> 
          }
          {
-            loggedIn&&user.name ? <LetteredAvatar name={user.name} backgroundColors={defaultColors}/>: <div>
+            loggedIn&&user ? <Avatar name={user}/>: <div>
             <img className="w-10 h-10" src={boy} alt="Landing" />
           </div>
          }

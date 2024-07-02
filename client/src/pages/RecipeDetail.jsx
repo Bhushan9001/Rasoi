@@ -3,13 +3,16 @@ import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { IoChevronBack } from "react-icons/io5";
 import boy from '../assets/boy.png';
-import EmojiPicker from 'emoji-picker-react';
 import CommentComp from '../components/CommentComp';
+import { useRecoilValue } from 'recoil';
+import { userAtom } from '../atoms/userAtom';
+import Avatar from '../components/Avatar';
 
 const RecipeDetail = () => {
 
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const user = useRecoilValue(userAtom);
 
   const handleFocus = () => {
     setIsFocused(true);
@@ -136,12 +139,14 @@ const RecipeDetail = () => {
 
       <div className='px-10 md:px-24'>
         <div className='font-barlow-condensed text-3xl font-semibold'>
-          125 &nbsp;Comments
+        {Array.isArray(recipe.comments)?recipe.comments.length:0} Comments 
         </div>
 
         <div className='pt-6 pb-3 flex flex-col space-y-2'>
           <div className='flex space-x-4'>
-            <img className="w-10 h-10" src={boy} alt="avatar" />
+           {user ? <Avatar name={user}/>: <div>
+            <img className="w-10 h-10" src={boy} alt="Landing" />
+          </div>}
             <input
               placeholder='Add a comment...'
               className='outline-none border-b-2 border-[#76767744] focus:border-[#10111144] w-[70%] md:w-[60%] text-xl font-normal font-poppins'
@@ -171,8 +176,8 @@ const RecipeDetail = () => {
           )}
         </div>
 
-        {recipe && Array.isArray(recipe.comments) && recipe.comments.map((comment) => {
-                  return <CommentComp name ={comment.author.name} text = {comment.text} likes = {comment.likes} days={calculateDaysSinceCreated(comment.createdAt)}replies={comment.replies}/>
+        {recipe && Array.isArray(recipe.comments) && recipe.comments.map((comment,index) => {
+                  return <CommentComp key={index} name ={comment.author.name} text = {comment.text} likes = {comment.likes} days={calculateDaysSinceCreated(comment.createdAt)}replies={comment.replies}/>
                 })}
        
       </div>

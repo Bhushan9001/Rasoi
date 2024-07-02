@@ -3,6 +3,7 @@ import boy from '../assets/boy.png';
 import like from '../assets/like.png';
 import liked from '../assets/liked.png';
 import ReplyComp from './ReplyComp';
+import Avatar from './Avatar';
 
 const CommentComp = ({ name, text, likes, days, replies, addReply }) => {
     const [reply, setReply] = useState(false);
@@ -34,7 +35,7 @@ const CommentComp = ({ name, text, likes, days, replies, addReply }) => {
     return (
         <>
             <div className='pb-3 flex space-x-5 items-center w-full md:w-[60%] font-poppins'>
-                <img className="w-10 h-10" src={boy} alt="avatar" />
+                <Avatar name={name}/>
                 <div>
                     <div className='flex space-x-3 items-center'>
                         <div className='text-base '>{name}</div>
@@ -53,7 +54,7 @@ const CommentComp = ({ name, text, likes, days, replies, addReply }) => {
                             ) : (
                                 <div className='flex space-x-1'>
                                     <img className="w-6 h-6 hover:cursor-pointer" src={liked} onClick={handleLike} alt="liked" />
-                                    <span className='text-[#686767]'>20k</span>
+                                    <span className='text-[#686767]'>{}</span>
                                 </div>
                             )}
                         </div>
@@ -79,7 +80,7 @@ const CommentComp = ({ name, text, likes, days, replies, addReply }) => {
                 <div className='flex flex-col space-y-4 ps-14 md:ps-24 font-poppins'>
                     {replies.map((reply, index) => (
                         <div key={index} className='flex space-x-4 py-3'>
-                            <img className="w-10 h-10" src={boy} alt="avatar" />
+                            <Avatar name={reply.authorName}/>
                             <div className='w-[80%] md:w-[60%]'>
                                 <div className='text-base'>{reply.authorName}</div>
                                 <div className='text-xl'>{reply.text}</div>

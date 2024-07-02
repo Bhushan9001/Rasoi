@@ -3,6 +3,7 @@ import IngredientComp from '../components/IngredientComp'
 import InstructionComp from '../components/InstructionComp'
 import { IoChevronBack } from "react-icons/io5";
 import { Link } from 'react-router-dom'
+import axios from 'axios';
 
 const AddRecipe = () => {
 
@@ -14,6 +15,7 @@ const AddRecipe = () => {
     const [description, setDescription] = useState("");
     const [instruction, setInstructions] = useState(['']);
     const [ingredients, setIngredients] = useState([{ name: '', quantity: '' }]);
+    const token = localStorage.getItem('token');
 
     const handleImageUpload = (event) => {
         const file = event.target.files[0];
@@ -30,10 +32,27 @@ const AddRecipe = () => {
         document.getElementById('dropzone-file').click();
     };
 
+    const formData = new FormData();
+    formData.append('image',image);
+    formData.append('title',title);
+    formData.append('type',type);
+    formData.append('cuisine',cuisine);
+    formData.append('description',description);
+    formData.append('instruction',instruction);
+    formData.append('ingredients',ingredients);
 
-    const submitRecipes = async () => {
+
+
+
+    const submitRecipes = async (e) => {
+        e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8080/recipe/addRecipe', { title, description, type, cuisine, instruction, ingredients, image });
+            const response = await axios.post('http://localhost:8080/recipe/addRecipe',formData,{
+                headers:{
+                    'Content-Type':'multipart/form-data',
+                    'Authorization':token
+                }
+            });
             console.log(response.data)
         } catch (error) {
             console.error('Error fetching recipes:', error);
@@ -58,7 +77,7 @@ const AddRecipe = () => {
                     <div className='md:px-20 font-barlow-condensed text-4xl font-semibold mt-3 text-[#228b21]'>Create Your Own Recipe</div>
                 </div>
 
-                <form>
+                <form onSubmit={submitRecipes}>
 
                     <div className='md:flex w-full space-x-9 my-5'>
 

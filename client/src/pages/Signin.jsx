@@ -24,7 +24,7 @@ const Signin = () => {
   const login = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/user/signin", {
+      const response = await axios.post("http://localhost:8080/users/signin", {
         email: email,
         password: password,
       });

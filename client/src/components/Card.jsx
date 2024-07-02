@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 const Card = (props) => {
     const navigate = useNavigate();
     console.log(props)
+    const imageurl = `http://localhost:8080${props.img}`;
 
     return (
         <>
@@ -13,7 +14,7 @@ const Card = (props) => {
                 onClick={()=>{navigate(`/recipes/${props.id}`)}}>
                 <div className='grid grid-cols-1 gap-3'>
                     <div className='flex justify-center'>
-                        <img className='rounded-[3%] w-48 h-40' src={props.img} alt={props.title} />
+                        <img className='rounded-[3%] w-48 h-40' src = {imageurl} alt={props.title} />
                     </div>
                     <div className='flex justify-center items-center py-3 space-x-2'>
                         <div className='text-3xl font-barlow-condensed font-medium text-[#428C41] text-center w-48 truncate text-wrap'>{props.title}</div>

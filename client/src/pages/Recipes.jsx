@@ -24,7 +24,7 @@ const Recipes = () => {
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/recipe/getRecipes');
+        const response = await axios.get('http://localhost:8080/recipes');
         if (response.data) {
           console.log(response.data.recipes)
           setRecipes(response.data.recipes);
@@ -97,7 +97,7 @@ const Recipes = () => {
               recipe.cuisine.toLowerCase().includes(searchQuery.toLowerCase()) ||
               recipe.authorName.toLowerCase().includes(searchQuery.toLowerCase())
             ).map((recipe) => (
-              <Card img={recipe.imageurl} title={recipe.title} cuisine={recipe.cuisine} chef={recipe.authorName} id={recipe.id} />
+              <Card key={recipe.id} img={recipe.imageurl} title={recipe.title} cuisine={recipe.cuisine} chef={recipe.authorName} id={recipe.id} />
             ))
           }
         </div>

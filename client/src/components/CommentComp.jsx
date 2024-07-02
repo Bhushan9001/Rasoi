@@ -7,10 +7,10 @@ import Avatar from './Avatar';
 import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowUp } from "react-icons/md";
 import { GoHeart,GoHeartFill } from "react-icons/go";
 
-const CommentComp = ({ name, text, likes, days, replies, addReply }) => {
+const CommentComp = ({ name, text, likes, days, replies, id , recipeId }) => {
     const [reply, setReply] = useState(false);
     const [repliess, setReplies] = useState(false);
-
+    // console.log(id,recipeId);
     const visibleReplies = () => {
         setReplies(!repliess);
         if (!replies) {
@@ -68,7 +68,7 @@ const CommentComp = ({ name, text, likes, days, replies, addReply }) => {
             </div>
 
             <div className='flex ps-14 md:ps-24'>
-                {reply && <ReplyComp addReply={addReply} />}
+                {reply && <ReplyComp recipeId = {recipeId} commentsId = {id} />}
             </div>
 
             {

@@ -7,11 +7,11 @@ const upload = require('../middleware/uploadImage');
 
 
 
-router.post("/addRecipe",passport.authenticate('jwt', { session: false }),upload.single('image'),recipeController.addRecipe);
+router.post("/",passport.authenticate('jwt', { session: false }),upload.single('image'),recipeController.addRecipe);
 router.put("/updateRecipe/:id",passport.authenticate('jwt', { session: false }),recipeController.updateRecipe);
 router.delete("/deleteRecipe/:id",passport.authenticate('jwt',{session:false}),recipeController.deleteRecipe);
-router.get("/getRecipes",recipeController.getAllRecipe);
-router.get("/getRecipes/:id",recipeController.getRecipeById);
+router.get("/",recipeController.getAllRecipe);
+router.get("/:id",recipeController.getRecipeById);
 router.get("/search",filterController.searchByTitle);
 router.get("/filter",filterController.filterByIngredientsAndCuisine);
 

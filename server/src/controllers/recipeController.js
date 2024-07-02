@@ -5,6 +5,7 @@ const recipeController = {
   addRecipe: async (req, res) => {
     try {
       const { title, description, type, cuisine, instruction, ingredients } = req.body;
+      console.log(req.body);
       const authorId = req.user.id;
       const createdRecipe = await prisma.recipe.create({
         data: {

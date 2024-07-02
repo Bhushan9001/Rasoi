@@ -2,7 +2,7 @@ const {Router} = require('express');
 const {recipeController, filterController} = require('../controllers/recipeController');
 const passport = require('passport');
 const router = Router();
-const upload=require('../middleware/uploadImage');
+const upload = require('../middleware/uploadImage');
 
 
 

@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Card from '../components/Card'
 import axios from 'axios'
 import plus from '../assets/plus.png'
 import search from '../assets/search.png'
 import { IoChevronBack } from "react-icons/io5";
+import CardSkeleton from '../components/CardSkeleton'
 
 const Recipes = () => {
 
   const [searchQuery, setSearchQuery] = useState('');
-
+  const [loading, setLoading] = useState(false);
+  const [recipes, setRecipes] = useState([])
+  const random = [1,2,3,4,5,6];
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
@@ -20,21 +23,24 @@ const Recipes = () => {
   }
 
 
-  const [recipes, setRecipes] = useState([])
   useEffect(() => {
+    setLoading(true);
     const fetchRecipes = async () => {
       try {
         const response = await axios.get('http://localhost:8080/recipes');
         if (response.data) {
           console.log(response.data.recipes)
           setRecipes(response.data.recipes);
+          setLoading(false);
         }
       } catch (error) {
         console.error('Error fetching recipes:', error);
       }
     };
 
-    fetchRecipes();
+   setInterval(()=>{
+    fetchRecipes()
+   },500)
   }, [])
 
   return (
@@ -46,8 +52,8 @@ const Recipes = () => {
             <IoChevronBack size={33} color={'#228b21'} />
             <div className='text-2xl font-barlow-condensed md:flex hidden text-[#228b21]'>Back To Home</div>
           </Link>
-           <div className='w-80 hidden md:flex'></div>
-          
+          <div className='w-80 hidden md:flex'></div>
+
 
           <div className='text-5xl font-semibold font-barlow-condensed text-center py-5'>
             Delicious Discoveries
@@ -90,20 +96,26 @@ const Recipes = () => {
           </div>
         </div>
 
-        <div className='flex flex-wrap justify-center'>
-          {
-            recipes && recipes.filter((recipe) =>
-              recipe.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-              recipe.cuisine.toLowerCase().includes(searchQuery.toLowerCase()) ||
-              recipe.authorName.toLowerCase().includes(searchQuery.toLowerCase())
-            ).map((recipe) => (
-              <Card key={recipe.id} img={recipe.imageurl} title={recipe.title} cuisine={recipe.cuisine} chef={recipe.authorName} id={recipe.id} />
-            ))
-          }
-        </div>
+
+        {
+          loading ? <div className='flex flex-wrap justify-center'>{random.map(()=><CardSkeleton/>)}</div> : 
+          <div className='flex flex-wrap justify-center'>
+            {
+              recipes && recipes.filter((recipe) =>
+                recipe.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                recipe.cuisine.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                recipe.authorName.toLowerCase().includes(searchQuery.toLowerCase())
+              ).map((recipe) => (
+
+                <Card key={recipe.id} img={recipe.imageurl} title={recipe.title} cuisine={recipe.cuisine} chef={recipe.authorName} id={recipe.id} />
+
+              ))
+            }
+          </div>
+        }
+
       </div>
     </>
   )
 }
-
 export default Recipes

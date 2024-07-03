@@ -70,6 +70,13 @@ const RecipeDetail = () => {
   };
 
   const daysSinceCreated = calculateDaysSinceCreated(recipe.createdAt);
+
+  const copyToClipBoard = async() =>{
+    const url = `http://localhost:5173/recipes/${recipe.id}`
+    await navigator.clipboard.writeText(url).then(()=>alert("Copied Succesfully"))
+
+
+  }
   
 
   return (
@@ -139,6 +146,8 @@ const RecipeDetail = () => {
               <div>By {recipe.authorName}</div>
               <div>{daysSinceCreated} days ago</div>
             </div>
+
+            <button onClick={()=>{copyToClipBoard()}}>Share with freinds</button>
 
           </div>
         </div>

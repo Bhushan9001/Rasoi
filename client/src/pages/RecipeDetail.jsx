@@ -7,8 +7,17 @@ import CommentComp from '../components/CommentComp';
 import { useRecoilValue } from 'recoil';
 import { userAtom } from '../atoms/userAtom';
 import Avatar from '../components/Avatar';
+import { WhatsappShareButton, FacebookShareButton, WhatsappIcon, FacebookIcon, LinkedinShareButton, LinkedinIcon, TelegramShareButton, TelegramIcon } from "react-share";
+import { PiPaperPlaneTiltFill } from "react-icons/pi";
 
 const RecipeDetail = () => {
+
+  const [flag, setFlag] = useState(false)
+
+  const handleSent = () => {
+    setFlag(true);
+  }
+
 
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState('');
@@ -17,6 +26,9 @@ const RecipeDetail = () => {
   const user = useRecoilValue(userAtom);
   const imageurl = `http://localhost:8080${recipe.imageurl}`;
   const token = localStorage.getItem('token');
+
+  const url = `http://localhost:5173/recipes/${recipe.id}`;
+  const title = `${recipe.title} Recipe`;
 
   const handleFocus = () => {
     setIsFocused(true);
@@ -31,10 +43,10 @@ const RecipeDetail = () => {
     setInputValue(e.target.value);
   };
 
-  const handleSubmit = async() => {
+  const handleSubmit = async () => {
     console.log('Comment submitted');
-    const response = await axios.post(`http://localhost:8080/recipes/${recipe.id}/comments`,{text:inputValue},{
-      headers:{
+    const response = await axios.post(`http://localhost:8080/recipes/${recipe.id}/comments`, { text: inputValue }, {
+      headers: {
         'Authorization': token,
       }
     })
@@ -71,13 +83,13 @@ const RecipeDetail = () => {
 
   const daysSinceCreated = calculateDaysSinceCreated(recipe.createdAt);
 
-  const copyToClipBoard = async() =>{
+  const copyToClipBoard = async () => {
     const url = `http://localhost:5173/recipes/${recipe.id}`
-    await navigator.clipboard.writeText(url).then(()=>alert("Copied Succesfully"))
+    await navigator.clipboard.writeText(url).then(() => alert("Copied Succesfully"))
 
 
   }
-  
+
 
   return (
     <>
@@ -142,12 +154,51 @@ const RecipeDetail = () => {
               </ol>
             </div>
 
-            <div className='text-right font-extralight me-10 font-ubuntu italic'>
-              <div>By {recipe.authorName}</div>
-              <div>{daysSinceCreated} days ago</div>
+            <div className='md:flex justify-between px-7 items-center'>
+
+              <div className='flex items-center space-x-1 md:space-x-2 bg-[#68F665] border-2 border-[#68F665] px-6 md:px-8 py-3 md:py-3 font-medium font-poppins rounded-full'>
+                <div>Share with friends</div>
+
+                {
+                  flag === false && (
+                    <PiPaperPlaneTiltFill size={35} className='hover:cursor-pointer p-1' onClick={handleSent} />
+                  )
+                }
+                {
+                  flag === true && (
+                    <>
+                      <WhatsappShareButton url={url} title={title} className='icon'>
+                        <WhatsappIcon size={35} round />
+                      </WhatsappShareButton>
+
+                      <FacebookShareButton url={url} quote={title} className='icon'>
+                        <FacebookIcon size={35} round/>
+                      </FacebookShareButton>
+
+                      <LinkedinShareButton url={url} quote={title} className='icon'>
+                        <LinkedinIcon size={35} round />
+                      </LinkedinShareButton>
+
+                      <TelegramShareButton url={url} quote={title} className='icon'>
+                        <TelegramIcon size={35} round />
+                      </TelegramShareButton>
+                    </>
+                  )
+                }
+
+
+
+              </div>
+
+
+              <div className='text-right font-extralight me-10 font-ubuntu italic my-2 md:my-0'>
+                <div>By {recipe.authorName}</div>
+                <div>{daysSinceCreated} days ago</div>
+              </div>
+
             </div>
 
-            <button onClick={()=>{copyToClipBoard()}}>Share with freinds</button>
+
 
           </div>
         </div>
@@ -157,14 +208,14 @@ const RecipeDetail = () => {
 
       <div className='px-10 md:px-24'>
         <div className='font-barlow-condensed text-3xl font-semibold'>
-        {Array.isArray(recipe.comments)?recipe.comments.length:0} Comments 
+          {Array.isArray(recipe.comments) ? recipe.comments.length : 0} Comments
         </div>
 
         <div className='pt-6 pb-3 flex flex-col space-y-2'>
           <div className='flex space-x-4'>
-           {user ? <Avatar name={user}/>: <div>
-            <img className="w-10 h-10" src={boy} alt="Landing" />
-          </div>}
+            {user ? <Avatar name={user} /> : <div>
+              <img className="w-10 h-10" src={boy} alt="Landing" />
+            </div>}
             <input
               placeholder='Add a comment...'
               className='outline-none border-b-2 border-[#76767744] focus:border-[#10111144] w-[70%] md:w-[60%] text-xl font-normal font-poppins'
@@ -194,10 +245,10 @@ const RecipeDetail = () => {
           )}
         </div>
 
-        {recipe && Array.isArray(recipe.comments) && recipe.comments.map((comment,index) => {
-                  return <CommentComp key={index} name ={comment.author.name} text = {comment.text} commentLikes = {comment.likes} days={calculateDaysSinceCreated(comment.createdAt)}replies={comment.replies} id={comment.id} recipeId={recipe.id}/>
-                })}
-       
+        {recipe && Array.isArray(recipe.comments) && recipe.comments.map((comment, index) => {
+          return <CommentComp key={index} name={comment.author.name} text={comment.text} commentLikes={comment.likes} days={calculateDaysSinceCreated(comment.createdAt)} replies={comment.replies} id={comment.id} recipeId={recipe.id} />
+        })}
+
       </div>
 
 

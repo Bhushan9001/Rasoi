@@ -7,12 +7,13 @@ import search from '../assets/search.png'
 import { IoChevronBack } from "react-icons/io5";
 import CardSkeleton from '../components/CardSkeleton'
 
+
 const Recipes = () => {
 
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [recipes, setRecipes] = useState([])
-  const random = [1,2,3,4,5,6];
+  const random = [1,2,3,4,5,6,7,8];
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
@@ -37,6 +38,8 @@ const Recipes = () => {
         console.error('Error fetching recipes:', error);
       }
     };
+
+    fetchRecipes();
   }, [])
 
   return (

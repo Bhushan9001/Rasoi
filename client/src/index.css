@@ -32,6 +32,21 @@
   animation-range: entry 0 cover 23%;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.icon {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
 
   
 @tailwind base;

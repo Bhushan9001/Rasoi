@@ -195,7 +195,7 @@ const RecipeDetail = () => {
         </div>
 
         {recipe && Array.isArray(recipe.comments) && recipe.comments.map((comment,index) => {
-                  return <CommentComp key={index} name ={comment.author.name} text = {comment.text} likes = {comment.likes} days={calculateDaysSinceCreated(comment.createdAt)}replies={comment.replies} id={comment.id} recipeId={recipe.id}/>
+                  return <CommentComp key={index} name ={comment.author.name} text = {comment.text} commentLikes = {comment.likes} days={calculateDaysSinceCreated(comment.createdAt)}replies={comment.replies} id={comment.id} recipeId={recipe.id}/>
                 })}
        
       </div>

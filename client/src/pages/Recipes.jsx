@@ -37,10 +37,6 @@ const Recipes = () => {
         console.error('Error fetching recipes:', error);
       }
     };
-
-   setInterval(()=>{
-    fetchRecipes()
-   },500)
   }, [])
 
   return (

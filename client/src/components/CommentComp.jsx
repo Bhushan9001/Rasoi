@@ -6,10 +6,13 @@ import ReplyComp from './ReplyComp';
 import Avatar from './Avatar';
 import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowUp } from "react-icons/md";
 import { GoHeart,GoHeartFill } from "react-icons/go";
+import axios from 'axios';
 
-const CommentComp = ({ name, text, likes, days, replies, id , recipeId }) => {
+const CommentComp = ({ name, text, days,commentLikes ,replies, id , recipeId }) => {
     const [reply, setReply] = useState(false);
     const [repliess, setReplies] = useState(false);
+    const [likes , setLikes] = useState(commentLikes);
+    const token = localStorage.getItem("token");
     // console.log(id,recipeId);
     const visibleReplies = () => {
         setReplies(!repliess);
@@ -30,8 +33,14 @@ const CommentComp = ({ name, text, likes, days, replies, id , recipeId }) => {
 
     const [L_flag, setL_Flag] = useState(false);
 
-    const handleLike = () => {
+    const handleLike = async() => {
+        
+        const response = await axios.put(`http://localhost:8080/recipes/${recipeId}/comments/${id}/likes`,{},{headers:{
+            'Authorization':token
+        }})
         setL_Flag(!L_flag);
+        setLikes(response.data.updatedComment.likes);
+        console.log(response.data);
     };
 
     return (

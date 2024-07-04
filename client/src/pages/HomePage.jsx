@@ -5,6 +5,7 @@ import Categories from '../components/Categories'
 import About from './About'
 import Footer from '../components/Footer'
 import landingBg from '../assets/landingBg.png'
+import Contact from './Contact'
 
 function HomePage() {
   return (
@@ -13,6 +14,7 @@ function HomePage() {
       <Landing/>
       <Categories/>
       <About/>
+      <Contact/>
       <Footer/>
     </div>
   )

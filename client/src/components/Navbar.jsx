@@ -71,7 +71,7 @@ const Navbar = () => {
             <Scroll to="About" className="block px-4 py-2 md:px-6 md:py-3 border-2 border-white hover:border-b-[#59c857] hover:cursor-pointer" smooth duration={500}>
               About us
             </Scroll>
-            <Scroll to="Categories" className="block px-4 py-2 md:px-6 md:py-3 border-2 border-white hover:border-b-[#59c857] hover:cursor-pointer" smooth duration={500}>
+            <Scroll to="Contact" className="block px-4 py-2 md:px-6 md:py-3 border-2 border-white hover:border-b-[#59c857] hover:cursor-pointer" smooth duration={500}>
               Contact
             </Scroll>
           </div>
@@ -192,7 +192,7 @@ const Navbar = () => {
             <Scroll to="About" className="block px-4 py-2 border-2 border-white hover:border-b-[#68F665]">
               About us
             </Scroll>
-            <Scroll to="Categories" className="block px-4 py-2 border-2 border-white hover:border-b-[#68F665]">
+            <Scroll to="Contact" className="block px-4 py-2 border-2 border-white hover:border-b-[#68F665]">
               Contact
             </Scroll>
 

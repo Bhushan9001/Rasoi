@@ -10,6 +10,7 @@ import HomePage from "./pages/HomePage";
 import Recipes from "./pages/Recipes";
 import AddRecipe from "./pages/AddRecipe";
 import { RecoilRoot } from "recoil";
+import MyRecipes from "./pages/MyRecipes";
 
 const App = ()=>{
   return(
@@ -21,6 +22,7 @@ const App = ()=>{
        <Route path="/signup" element={<Signup/>}/>
        <Route path="/signin" element={<Signin/>}/>
        <Route path="/addrecipe" element={<AddRecipe/>}/>
+       <Route path="/myRecipes" element={<MyRecipes/>}/>
      </Routes>   
     
   )

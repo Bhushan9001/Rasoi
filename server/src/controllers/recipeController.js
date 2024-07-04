@@ -110,6 +110,21 @@ const recipeController = {
       res.status(501).json({ "Message": "Internal Server Error", error })
     }
   },
+
+  getUsersAllRecipes:async(req,res)=>{
+    try {
+      const id = req.user.id;
+      // console.log(id)
+      if(!id) res.status(403).json({"Message":"You are not logged in"});
+      const recipes = await prisma.recipe.findMany({
+        where:{authorId:id}
+      })
+      res.status(200).json({recipes})
+    } catch (error) {
+      console.log(error);
+      res.status(501).json({ "Message": "Internal Server Error", error })
+    }
+  }
   
 
 }
@@ -117,7 +132,8 @@ const recipeController = {
 const filterController = {
   createdByUser: async (req, res) => {
 
-    const { id } = req.params;
+    const  id  = req.user.id;
+    console.log(id)
 
     try {
       const userRecipes = await prisma.recipe.findMany({

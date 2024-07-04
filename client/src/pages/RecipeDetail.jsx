@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { IoChevronBack } from "react-icons/io5";
 import boy from '../assets/boy.png';
@@ -13,6 +13,9 @@ import { PiPaperPlaneTiltFill } from "react-icons/pi";
 const RecipeDetail = () => {
 
   const [flag, setFlag] = useState(false)
+  const location = useLocation();
+  const dest = location.state?.from;
+  console.log(dest);
 
   const handleSent = () => {
     setFlag(true);

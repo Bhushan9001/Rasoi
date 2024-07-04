@@ -144,12 +144,12 @@ const Navbar = () => {
 
               {
                 arrow && (
-                  <div className='z-10 absolute mt-2 bg-white shadow-lg rounded-md dropdown'>
+                  <div className='z-10 absolute mt-2  bg-white shadow-lg rounded-md dropdown w-44 right-0'>
                     {
                       loggedIn ? (
-                        <div className='py-2' style={{ boxShadow: 'rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px' }}>
+                        <div className='space-y-5 py-5' style={{ boxShadow: 'rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px' }}>
 
-                          <div className='px-4 py-2 hover:bg-gray-100 cursor-pointer'>My Recipes</div>
+                          <div className='px-4 py-2 hover:bg-gray-100 cursor-pointer'><Link to="/myRecipes">My Recipes</Link></div>
                           <div className='px-4 py-2 hover:bg-gray-100 cursor-pointer'>
                             <Link to="/" className="" onClick={() => {
                               localStorage.clear();
@@ -160,7 +160,7 @@ const Navbar = () => {
                           </div>
                         </div>
                       ) : (
-                        <div className='py-2'>
+                        <div className='space-y-5 py-5'>
                           <div className='px-4 py-2 hover:bg-gray-100 cursor-pointer'>
                             <Link to="/signin" className="">
                               Login

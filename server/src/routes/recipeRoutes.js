@@ -11,11 +11,12 @@ router.post("/",passport.authenticate('jwt', { session: false }),upload.single('
 router.put("/updateRecipe/:id",passport.authenticate('jwt', { session: false }),recipeController.updateRecipe);
 router.delete("/deleteRecipe/:id",passport.authenticate('jwt',{session:false}),recipeController.deleteRecipe);
 router.get("/",recipeController.getAllRecipe);
+router.get("/users",passport.authenticate('jwt', { session: false }),recipeController.getUsersAllRecipes);
 router.get("/:id",recipeController.getRecipeById);
 router.get("/search",filterController.searchByTitle);
 router.get("/filter",filterController.filterByIngredientsAndCuisine);
 
 
 //Filter Routes
-router.get("/userRecipes/:id",passport.authenticate('jwt',{session:false}),filterController.createdByUser);
+// router.get("/userRecipes",passport.authenticate('jwt',{session:false}),filterController.createdByUser);
 module.exports = router;

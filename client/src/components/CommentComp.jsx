@@ -31,14 +31,12 @@ const CommentComp = ({ name, text, days,commentLikes ,replies, id , recipeId }) 
 
     };
 
-    const [L_flag, setL_Flag] = useState(false);
 
     const handleLike = async() => {
         
         const response = await axios.put(`http://localhost:8080/recipes/${recipeId}/comments/${id}/likes`,{},{headers:{
             'Authorization':token
         }})
-        setL_Flag(!L_flag);
         setLikes(response.data.updatedComment.likes);
         console.log(response.data);
     };
@@ -56,19 +54,15 @@ const CommentComp = ({ name, text, days,commentLikes ,replies, id , recipeId }) 
                     <div className='text-xl font-normal'>{text}.</div>
 
                     <div className='py-2 flex space-x-4 items-center'>
-                        {L_flag === false ? (
+                        
                             <div className='flex space-x-1'>
                                 {/* <img className="w-6 h-6 hover:cursor-pointer" src={like} onClick={handleLike} alt="like" /> */}
                                 <GoHeart size={22} className='hover:cursor-pointer' onClick={handleLike}/>
                                 <span className='text-[#686767]'>{likes}</span>
                             </div>
-                        ) : (
-                            <div className='flex space-x-1'>
-                                {/* <img className="w-6 h-6 hover:cursor-pointer" src={liked} onClick={handleLike} alt="liked" /> */}
-                                <GoHeartFill size={22} className='hover:cursor-pointer' onClick={handleLike} color='red'/>
-                                <span className='text-[#686767]'>{likes}</span>
-                            </div>
-                        )}
+                      
+                            
+                     
                         <div>
                             <div onClick={handleReply} className='hover:bg-[#c7c6c6] hover:cursor-pointer px-2 py-1 rounded-[10%] text-sm'>Reply</div>
                         </div>

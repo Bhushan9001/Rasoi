@@ -83,12 +83,6 @@ const RecipeDetail = () => {
 
   const daysSinceCreated = calculateDaysSinceCreated(recipe.createdAt);
 
-  const copyToClipBoard = async () => {
-    const url = `http://localhost:5173/recipes/${recipe.id}`
-    await navigator.clipboard.writeText(url).then(() => alert("Copied Succesfully"))
-
-
-  }
 
 
   return (
@@ -167,7 +161,7 @@ const RecipeDetail = () => {
                 {
                   flag === true && (
                     <>
-                      <WhatsappShareButton url={url} title={title} className='icon'>
+                      <WhatsappShareButton  title={title} url={url}  className='icon'>
                         <WhatsappIcon size={35} round />
                       </WhatsappShareButton>
 

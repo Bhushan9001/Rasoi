@@ -6,13 +6,15 @@ import { Link as Scroll } from 'react-scroll';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { userAtom } from '../atoms/userAtom';
 import Avatar from './Avatar';
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
 const Navbar = () => {
   
   const [isOpen, setIsOpen] = useState(false);
   const [loggedIn , setLoggedIn] = useState(false);
   const [user,setUser] = useRecoilState(userAtom);
-  
+  const [visible, setVisible] = useState();
+
   useEffect(()=>{
       const token = localStorage.getItem("token");
       setUser(localStorage.getItem("name"));
@@ -68,19 +70,12 @@ const Navbar = () => {
         </div>
         <div className="hidden md:flex items-center space-x-5 font-poppins font-normal text-xl">
          {
-          loggedIn?<Link to="/" className="" onClick={()=>{
-          localStorage.clear();
-          setLoggedIn(false);
-        }}>
-            Logout
-          </Link>:<Link to="/signin" className="">
-          Login
-        </Link> 
-         }
-         {
-            loggedIn&&user ? <Avatar name={user}/>: <div>
-            <img className="w-10 h-10" src={boy} alt="Landing" />
-          </div>
+           <div className='flex justify-center items-center space-x-1 cursor-pointer'>
+             {loggedIn&&user ? <Avatar name={user}/>: <div>
+            <img className="w-12 h-12" src={boy} alt="Landing" />
+          </div>}
+          <MdOutlineKeyboardArrowDown size={30}/>
+           </div>
          }
          
         </div>
@@ -114,5 +109,24 @@ const Navbar = () => {
     </nav>
   );
 };
+
+function Dropdown(){
+  return(
+    <>
+
+{
+          loggedIn?<Link to="/" className="" onClick={()=>{
+          localStorage.clear();
+          setLoggedIn(false);
+        }}>
+            Logout
+          </Link>:<Link to="/signin" className="">
+          Login
+        </Link> 
+         }
+    </>
+
+  )
+}
 
 export default Navbar;

@@ -144,7 +144,7 @@ const Navbar = () => {
 
               {
                 arrow && (
-                  <div className='z-10 absolute mt-2  bg-white shadow-lg rounded-md dropdown w-44 right-0'>
+                  <div className='z-10 absolute mt-2 bg-white shadow-lg rounded-md dropdown w-44 mx-8'>
                     {
                       loggedIn ? (
                         <div className='space-y-5 py-5' style={{ boxShadow: 'rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px' }}>

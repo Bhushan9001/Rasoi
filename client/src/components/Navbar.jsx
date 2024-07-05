@@ -34,11 +34,13 @@ const Navbar = () => {
   return (
     <>
       <nav className="px-3 py-4 bg-white shadow-md w-full top-0 fixed z-50">
-        <div className="container mx-auto flex justify-between items-center">
-          <div className="text-2xl font-bold">
+        <div className="flex justify-between md:justify-start items-center w-full">
+
+          <div className="text-2xl font-bold w-[25%] flex justify-center">
             <img className="w-24 h-16 md:w-32 md:h-20" src={logo} alt="Logo" />
             {/* Rasoi */}
           </div>
+          
           <div className="md:hidden flex justify-center items-center space-x-4">
             <button
               onClick={toggleNavbar}
@@ -61,7 +63,8 @@ const Navbar = () => {
               </svg>
             </button>
           </div>
-          <div className="hidden md:flex flex-1 justify-center items-center space-x-8 font-poppins font-normal text-xl">
+
+          <div className="hidden md:flex flex-1 justify-center items-center space-x-8 font-poppins font-normal text-xl w-[50%]">
             <Scroll to="Home" className="block px-4 py-2 md:px-6 md:py-3 border-2 border-white hover:border-b-[#59c857] hover:cursor-pointer" smooth duration={500}>
               Home
             </Scroll>
@@ -75,53 +78,9 @@ const Navbar = () => {
               Contact
             </Scroll>
           </div>
-          <div className="hidden md:flex items-center space-x-5 font-poppins font-normal text-xl">
-
-            {/* <div>
-                <div className='flex justify-center items-center space-x-1 cursor-pointer'>
-                  {
-                    loggedIn && user ? <Avatar name={user} />
-                      :
-                      <div>
-                        <img className="w-12 h-12" src={boy} alt="Landing" />
-                      </div>
-                  }
 
 
-                  {
-                    arrow === true ? (
-                      <MdOutlineKeyboardArrowUp size={30} onClick={handleArrow} />
-                    ) : (
-                      <MdOutlineKeyboardArrowDown size={30} onClick={handleArrow} />
-                    )
-                  }
-
-                </div>
-
-
-                <div className='z-0'>
-                  {
-                    arrow === true ? (
-                      <div className=''>
-                        <div>
-                          My Recipes
-                        </div>
-                        <div>
-                          Logout
-                        </div>
-                      </div>
-                    ) : (
-                      <div>
-                        <div>
-                          Login
-                        </div>
-                      </div>
-                    )
-                  }
-                </div>
-
-
-              </div> */}
+          <div className="hidden md:flex justify-center items-center space-x-5 font-poppins font-normal text-xl w-[25%]">
 
             <div>
               <div className='flex justify-center items-center space-x-1 cursor-pointer' onClick={handleArrow}>
@@ -180,7 +139,10 @@ const Navbar = () => {
             </div>
 
           </div>
+
         </div>
+
+
         <div className={`${isOpen ? 'block' : 'hidden'} md:hidden mt-4`}>
           <div className="flex flex-col items-center space-y-4 font-poppins font-normal text-xl">
             <Scroll to="Home" className="block px-4 py-2 border-2 border-white hover:border-b-[#68F665]">

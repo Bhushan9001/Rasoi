@@ -2,8 +2,8 @@ import React from 'react'
 
 const About = () => {
     return (
-        <>
-            <div className='text-5xl font-semibold font-barlow-condensed text-center py-8' name = "About">
+        <div className='' name = "About">
+            <div className='text-5xl font-semibold font-barlow-condensed text-center pt-28 md:pt-32 pb-8'>
                 About Us
             </div>
             <div className='px-6 py-4 md:px-72 md:py-9 font-poppins' style={{ lineHeight: '2.6' }}>
@@ -13,7 +13,7 @@ const About = () => {
                 We love hearing from our users and are always here to help.<br/>
                 Thank you for being a part of <span className='font-bold'>Rasoi</span>. We hope our recipes bring you as much joy and satisfaction as they do for us. Happy cooking
             </div>
-        </>
+        </div>
     )
 }
 

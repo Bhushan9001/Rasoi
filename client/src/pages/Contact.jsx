@@ -7,9 +7,9 @@ const Contact = () => {
     };
 
     return (
-        <div className='my-4' name="Contact">
+        <div className='' name="Contact">
 
-            <div className='flex space-x-4 justify-center my-4'>
+            <div className='flex space-x-4 justify-center mb-2 md:my-4 pt-28 md:pt-32 pb-5 md:pb-8'>
                 <div className='text-5xl font-barlow-condensed font-semibold'>Get In Touch</div>
             </div>
 

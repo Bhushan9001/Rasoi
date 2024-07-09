@@ -3,7 +3,7 @@ import React from 'react'
 function CardSkeleton() {
   return (
     <>
-      <div className='m-7 p-5 rounded-lg hover:cursor-pointer card animate-pulse boreder-gray-200  ' style={{ boxShadow: 'rgba(0, 0, 0, 0.1) 0px 10px 50px', transition: 'box-shadow 0.3s' }}
+      <div className='m-7 p-5 rounded-lg hover:cursor-pointer card animate-pulse border-gray-200  ' style={{ boxShadow: 'rgba(0, 0, 0, 0.1) 0px 10px 50px', transition: 'box-shadow 0.3s' }}
         onMouseEnter={(e) => e.currentTarget.style.boxShadow = 'rgba(0, 0, 0, 0.4) 0px 24px 50px -12px'}
         onMouseLeave={(e) => e.currentTarget.style.boxShadow = 'rgba(0, 0, 0, 0.2) 0px 18px 50px -10px'}>
         <div className='grid grid-cols-1 gap-3 space-y-5 py-5 px-10'>

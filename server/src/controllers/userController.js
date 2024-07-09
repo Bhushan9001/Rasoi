@@ -6,7 +6,10 @@ const authController = { // user Authentication Controller
   signup: async (req, res) => {  
     // console.log(req.body);
     try {
-      const { email,name, password } = req.body;
+      const { email, name, password } = req.body;
+      if(password.lenght < 6){
+        res.status(401).json({"message":"Password should be greater than 6 characters"});
+      }
       const hashed_password = bcrypt.hashSync(password, 10);
       const user = await prisma.user.create({
         data: {

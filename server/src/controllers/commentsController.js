@@ -75,7 +75,11 @@ const commentController = {
                         }
                     }
                 }
-            })
+            }).catch(e => {
+                res.status(401).json({"message":"unable to add reply to this comment" , "error":e})
+            }
+        )
+
 
             res.status(201).json({"Message":"Reply Added Succesfully",updatedComment});
 

@@ -22,10 +22,12 @@ const recipeController = {
         }
       });
 
+      if(!createdRecipe) res.status(404).json({"message":"Some error occured while adding recipe"})
       res.status(201).json({ "message": "Recipe added Successfully", createdRecipe })
       console.log('Recipe created:', createdRecipe);
 
     }
+   
     catch (error) {
       console.log(error);
       res.status(501).json({ "message": "Internal server error", error })
@@ -78,7 +80,7 @@ const recipeController = {
   getAllRecipe: async(req,res)=>{
       try {
         const recipes = await prisma.recipe.findMany();
-        if(recipes.length==0) return res.status(401).json({"Message":"There are no Recipes!!"})
+        if(recipes.length==0 || !recipes) return res.status(401).json({"Message":"Error while fetching recipes"})
         res.status(201).json({recipes});
 
     } catch (error) {
@@ -119,6 +121,7 @@ const recipeController = {
       const recipes = await prisma.recipe.findMany({
         where:{authorId:id}
       })
+      if(recipes.length==0 || !recipes) return res.status(401).json({"Message":"Error while fetching recipes"})
       res.status(200).json({recipes})
     } catch (error) {
       console.log(error);

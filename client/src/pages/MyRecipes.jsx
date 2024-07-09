@@ -1,14 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState} from 'react'
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import CardSkeleton from '../components/CardSkeleton';
 import Card from '../components/Card';
+import plus from '../assets/plus.png'
+import search from '../assets/search.png'
 import { IoChevronBack } from "react-icons/io5";
 
 function MyRecipes() {
 
+
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate('/addrecipe');
+  }
+
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
+
   const token = localStorage.getItem("token");
   const random = [1, 2, 3, 4, 5, 6, 7, 8];
 
@@ -35,7 +45,7 @@ function MyRecipes() {
     fetchRecipes();
   }, [])
   return (
-    <>
+    <div className='py-5'>
       <div className='flex justify-start items-center space-x-6 md:space-x-20 px-5 md:px-0'>
 
         <Link to={"/"} className='flex justify-start items-center text-center pl-5 cursor-pointer'>
@@ -47,6 +57,13 @@ function MyRecipes() {
 
         <div className='text-5xl font-semibold font-barlow-condensed text-center py-5'>
           My Recipes
+        </div>
+      </div>
+
+      <div className='md:flex px-6 md:px-60 items-center justify-end'>
+        <div className='flex space-x-3 md:space-x-5 pt-8 ps-10'>
+          <div className='text-4xl md:text-5xl font-semibold font-barlow-condensed text-[#228b21]'>Add New</div>
+          <img className='w-12 h-12 md:w-16 md:h-16 animate-bounce hover:cursor-pointer' src={plus} alt='plus' onClick={handleClick} />
         </div>
       </div>
 
@@ -62,7 +79,7 @@ function MyRecipes() {
           </div>
       }
 
-    </>
+    </div>
   )
 }
 

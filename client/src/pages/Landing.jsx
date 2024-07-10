@@ -9,7 +9,7 @@ const Landing = () => {
     return (
         <>
 
-            <div className='pt-24 md:flex w-full justify-center items-center' name="Home">
+            <div className='pt-20 md:flex w-full justify-center items-center' name="Home">
 
                 <div className='w-full md:w-1/2 flex justify-center p-7 '>
                     <div className='bg-[#9BFB99] w-36 md:w-44 h-60 md:h-72 animate__animated animate__rotateInDownLeft'></div>

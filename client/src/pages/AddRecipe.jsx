@@ -59,7 +59,7 @@ const AddRecipe = () => {
         });
 
         try {
-            const response = await toast.promise(axios.post('http://localhost:8080/recipes', formData, {
+            const response = await toast.promise(axios.post(`${import.meta.env.VITE_BACKEND}/recipes`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': token

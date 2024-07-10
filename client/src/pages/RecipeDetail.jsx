@@ -64,7 +64,7 @@ const RecipeDetail = () => {
 
   const fetchRecipes = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/recipes/${id}`);
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND}/recipes/${id}`);
       if (response.data) {
         console.log(response.data.recipe);
         setRecipe(response.data.recipe); setLoading(false);

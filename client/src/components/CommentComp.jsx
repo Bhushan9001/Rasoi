@@ -34,7 +34,7 @@ const CommentComp = ({ name, text, days,commentLikes ,replies, id , recipeId }) 
 
     const handleLike = async() => {
         
-        const response = await axios.put(`http://localhost:8080/recipes/${recipeId}/comments/${id}/likes`,{},{headers:{
+        const response = await axios.put(`${import.meta.env.VITE_BACKEND}/recipes/${recipeId}/comments/${id}/likes`,{},{headers:{
             'Authorization':token
         }})
         setLikes(response.data.updatedComment.likes);

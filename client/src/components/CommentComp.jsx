@@ -5,13 +5,13 @@ import liked from '../assets/liked.png';
 import ReplyComp from './ReplyComp';
 import Avatar from './Avatar';
 import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowUp } from "react-icons/md";
-import { GoHeart,GoHeartFill } from "react-icons/go";
+import { GoHeart, GoHeartFill } from "react-icons/go";
 import axios from 'axios';
 
-const CommentComp = ({ name, text, days,commentLikes ,replies, id , recipeId }) => {
+const CommentComp = ({ name, text, days, commentLikes, replies, id, recipeId }) => {
     const [reply, setReply] = useState(false);
     const [repliess, setReplies] = useState(false);
-    const [likes , setLikes] = useState(commentLikes);
+    const [likes, setLikes] = useState(commentLikes);
     const token = localStorage.getItem("token");
     // console.log(id,recipeId);
     const visibleReplies = () => {
@@ -32,19 +32,23 @@ const CommentComp = ({ name, text, days,commentLikes ,replies, id , recipeId }) 
     };
 
 
-    const handleLike = async() => {
-        
-        const response = await axios.put(`${import.meta.env.VITE_BACKEND}/recipes/${recipeId}/comments/${id}/likes`,{},{headers:{
-            'Authorization':token
-        }})
+    const handleLike = async () => {
+
+        const response = await axios.put(`${import.meta.env.VITE_BACKEND}/recipes/${recipeId}/comments/${id}/likes`, {}, {
+            headers: {
+                'Authorization': token
+            }
+        })
         setLikes(response.data.updatedComment.likes);
         console.log(response.data);
     };
 
     return (
         <>
-            <div className='pb-3 flex space-x-5 items-center w-full md:w-[60%] font-poppins'>
-                <Avatar name={name} />
+            <div className='pb-3 flex space-x-10 items-center w-full md:w-[60%] font-poppins'>
+                <div>
+                    <Avatar name={name} />
+                </div>
                 <div>
                     <div className='flex space-x-3 items-center'>
                         <div className='text-base '>{name}</div>
@@ -54,15 +58,15 @@ const CommentComp = ({ name, text, days,commentLikes ,replies, id , recipeId }) 
                     <div className='text-xl font-normal'>{text}.</div>
 
                     <div className='py-2 flex space-x-4 items-center'>
-                        
-                            <div className='flex space-x-1'>
-                                {/* <img className="w-6 h-6 hover:cursor-pointer" src={like} onClick={handleLike} alt="like" /> */}
-                                <GoHeart size={22} className='hover:cursor-pointer' onClick={handleLike}/>
-                                <span className='text-[#686767]'>{likes}</span>
-                            </div>
-                      
-                            
-                     
+
+                        <div className='flex space-x-1'>
+                            {/* <img className="w-6 h-6 hover:cursor-pointer" src={like} onClick={handleLike} alt="like" /> */}
+                            <GoHeart size={22} className='hover:cursor-pointer' onClick={handleLike} />
+                            <span className='text-[#686767]'>{likes}</span>
+                        </div>
+
+
+
                         <div>
                             <div onClick={handleReply} className='hover:bg-[#c7c6c6] hover:cursor-pointer px-2 py-1 rounded-[10%] text-sm'>Reply</div>
                         </div>
@@ -71,7 +75,7 @@ const CommentComp = ({ name, text, days,commentLikes ,replies, id , recipeId }) 
             </div>
 
             <div className='flex ps-14 md:ps-24'>
-                {reply && <ReplyComp recipeId = {recipeId} commentsId = {id} />}
+                {reply && <ReplyComp recipeId={recipeId} commentsId={id} />}
             </div>
 
             {

@@ -3,6 +3,7 @@ import logo from '../assets/logo.png';
 import { FaFacebookF } from "react-icons/fa";
 import { IoLogoInstagram } from "react-icons/io5";
 import { FaXTwitter } from "react-icons/fa6";
+import { Link } from 'react-router-dom';
 
 
 function Footer() {
@@ -23,18 +24,18 @@ function Footer() {
                     <div className='px-4'>
                         <div className='text-2xl'>Navigation</div>
                         <div className='flex flex-col space-y-0 text-xl pt-4'>
-                            <div>Home</div>
-                            <div>Recipes</div>
-                            <div>About Us</div>
-                            <div>Contact</div>
+                            <div><Link to="/">Home</Link></div>
+                            <div><Link to="/recipes">Recipes</Link></div>
+                            <div><Link to="/">About us</Link></div>
+                            <div><Link to="/">Contact</Link></div>
                         </div>
                     </div>
 
                     <div className='px-4'>
                         <div className='text-2xl'>Getting Started</div>
                         <div className='flex flex-col text-xl pt-4'>
-                            <div>Login</div>
-                            <div>Sign Up</div>
+                            <div><Link to="/signin">Login</Link></div>
+                            <div><Link to="/signup">Sign up</Link></div>
                             <div>Forgot Password</div>
                         </div>
                     </div>

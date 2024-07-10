@@ -14,6 +14,20 @@ Rasoi is a vibrant online platform where you can:
 -**MongoDB**
 -**Prisma**
 
-##Screen Shots
+## Screen Shots
+Home Page
+![image](https://github.com/Bhushan9001/Rasoi/assets/88984312/faace8cd-e4e2-4eea-994b-67eeaced28fc)
+
+Recipes page
+![image](https://github.com/Bhushan9001/Rasoi/assets/88984312/1eb1b874-2c03-4cec-a8fe-75365c2ebfd0)
+![image](https://github.com/Bhushan9001/Rasoi/assets/88984312/d6ec10fb-a67a-49ec-9ddc-1fb34326af78)
+![image](https://github.com/Bhushan9001/Rasoi/assets/88984312/c5e80a92-bcc6-4d84-9853-d70c6aec63c1)
+
+Comments section
+![image](https://github.com/Bhushan9001/Rasoi/assets/88984312/ae7c4b5f-244f-4170-88a3-7ee9d147c1a6)
+
+
+
+
 
 

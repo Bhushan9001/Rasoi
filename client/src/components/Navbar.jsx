@@ -148,7 +148,7 @@ const Navbar = () => {
             <Scroll to="Home" className="block px-4 py-2 border-2 border-white hover:border-b-[#68F665]">
               Home
             </Scroll>
-            <Link href="/recipes" className="block px-4 py-2 border-2 border-white hover:border-b-[#68F665]">
+            <Link to="/recipes" className="block px-4 py-2 border-2 border-white hover:border-b-[#68F665]">
               Recipes
             </Link>
             <Scroll to="About" className="block px-4 py-2 border-2 border-white hover:border-b-[#68F665]">

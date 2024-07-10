@@ -1,52 +1,41 @@
 import React from 'react'
-import indian from '../assets/indian.png';
-import italian from '../assets/italian.png';
-import french from '../assets/french.png';
-import chinese from '../assets/chinese.png';
+import palak from '../assets/palak.jpg';
+import tiramisu from '../assets/tiramisu.jpg';
+import french from '../assets/french.avif';
+import chinese from '../assets/chinese.jpg';
 
 const Categories = () => {
     return (
         <>
-        <div className='text-5xl font-semibold font-barlow-condensed text-center pb-3' name="Categories">
-            Popular Categories
-        </div>
-        <div className='md:flex justify-center space-x-14'>
-            <div className='text-center'>
-                <div className='my-3'>
-                    <img className="w-48 h-48" src={indian} alt="indian" />
-                </div>
-                <div className='py-5 text-4xl font-barlow-condensed font-semibold'>
-                    Indian
-                </div>
+            <div className='text-5xl font-semibold font-barlow-condensed text-center pb-8 pt-20' name="Categories">
+                Popular Categories
             </div>
+            
+            <div className='md:flex justify-center'>
+                <div className='md:flex categories-left'>
+                    <div className='p-10 flex flex-col justify-center items-center space-y-6'>
+                        <img src={palak} className='w-56 h-52 rounded-lg' style={{ boxShadow: 'rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset' }} />
+                        <div className='text-4xl font-barlow-condensed font-semibold'>Indian</div>
+                    </div>
 
-            <div className='text-center'>
-                <div className='my-3'>
-                    <img className="w-48 h-48" src={italian} alt="italian" />
+                    <div className='p-10 flex flex-col justify-center items-center space-y-6'>
+                        <img src={tiramisu} className='w-56 h-52 rounded-lg' style={{ boxShadow: 'rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset' }} />
+                        <div className='text-4xl font-barlow-condensed font-semibold'>Italian</div>
+                    </div>
                 </div>
-                <div className='py-5 text-4xl font-barlow-condensed font-semibold'>
-                    Italian
-                </div>
-            </div>
 
-            <div className='text-center'>
-                <div className='my-3'>
-                    <img className="w-48 h-48" src={french} alt="french" />
-                </div>
-                <div className='py-5 text-4xl font-barlow-condensed font-semibold'>
-                    French
-                </div>
-            </div>
+                <div className='md:flex categories-right'>
+                    <div className='p-10 flex flex-col justify-center items-center space-y-6'>
+                        <img src={french} className='w-56 h-52 rounded-lg' style={{ boxShadow: 'rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset' }} />
+                        <div className='text-4xl font-barlow-condensed font-semibold'>French</div>
+                    </div>
 
-            <div className='text-center'>
-                <div className='my-3'>
-                    <img className="w-48 h-48" src={chinese} alt="chinese" />
-                </div>
-                <div className='py-5 text-4xl font-barlow-condensed font-semibold'>
-                    Chiense
+                    <div className='p-10 flex flex-col justify-center items-center space-y-6'>
+                        <img src={chinese} className='w-56 h-52 rounded-lg' style={{ boxShadow: 'rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset' }} />
+                        <div className='text-4xl font-barlow-condensed font-semibold'>Chinese</div>
+                    </div>
                 </div>
             </div>
-        </div>
         </>
     )
 }

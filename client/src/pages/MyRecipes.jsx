@@ -27,7 +27,7 @@ function MyRecipes() {
     setLoading(true);
     const fetchRecipes = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/recipes/users", {
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND}/recipes/users`, {
           headers: {
             'Authorization': token
           }

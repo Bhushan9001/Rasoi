@@ -22,7 +22,7 @@ const RecipeDetail = () => {
   const [recipe, setRecipe] = useState({})
   const { id } = useParams();
   const user = useRecoilValue(userAtom);
-  const imageurl = `http://localhost:8080${recipe.imageurl}`;
+  const imageurl = `${import.meta.env.VITE_BACKEND}${recipe.imageurl}`;
   const token = localStorage.getItem('token');
 
   const url = `http://localhost:5173/recipes/${recipe.id}`;
@@ -64,7 +64,7 @@ const RecipeDetail = () => {
 
   const fetchRecipes = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/recipes/${id}`);
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND}/recipes/${id}`);
       if (response.data) {
         console.log(response.data.recipe);
         setRecipe(response.data.recipe); setLoading(false);
@@ -220,7 +220,7 @@ const RecipeDetail = () => {
 
               <div className='pt-6 pb-3 flex flex-col space-y-2'>
                 <div className='flex space-x-4'>
-                  {user ? <Avatar name={user} /> : <div>
+                  {user ? <Avatar name={user}/> : <div>
                     <img className="w-10 h-10" src={boy} alt="Landing" />
                   </div>}
                   <input

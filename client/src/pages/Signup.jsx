@@ -38,7 +38,7 @@ const Signup = () => {
   const signUp = async (e) => {
     e.preventDefault();
     try {
-      const response = await toast.promise(axios.post("http://localhost:8080/users/signup", {
+      const response = await toast.promise(axios.post(`${import.meta.env.VITE_BACKEND}/users/signup`, {
         name: name,
         email: email,
         password: password,

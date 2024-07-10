@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 const Card = (props) => {
     const navigate = useNavigate();
     console.log(props)
-    const imageurl = `http://localhost:8080${props.img}`;
+    const imageurl = `${import.meta.env.VITE_BACKEND}${props.img}`;
 
     return (
         <>

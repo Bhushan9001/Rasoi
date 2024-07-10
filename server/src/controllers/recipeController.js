@@ -5,7 +5,7 @@ const recipeController = {
   addRecipe: async (req, res) => {
     try {
       const { title, description, type, cuisine, instruction, ingredients } = req.body;
-      console.log(req.body);
+      // console.log(req.body);
       const imageurl = req.file ? `/images/${req.body.filename}`:" ";
       const authorId = req.user.id;
       const createdRecipe = await prisma.recipe.create({
@@ -136,7 +136,7 @@ const filterController = {
   createdByUser: async (req, res) => {
 
     const  id  = req.user.id;
-    console.log(id)
+    // console.log(id)
 
     try {
       const userRecipes = await prisma.recipe.findMany({

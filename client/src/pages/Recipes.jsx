@@ -28,7 +28,7 @@ const Recipes = () => {
     setLoading(true);
     const fetchRecipes = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/recipes');
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND}/recipes`);
         if (response.data) {
           console.log(response.data.recipes)
           setRecipes(response.data.recipes);

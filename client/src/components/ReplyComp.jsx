@@ -26,7 +26,7 @@ const ReplyComp = ({ recipeId , commentsId }) => {
     };
 
     const handleSubmit = async() => {
-        const response = await toast.promise(axios.put(`http://localhost:8080/recipes/${recipeId}/comments/${commentsId}/addReply`,{reply:inputValue},{
+        const response = await toast.promise(axios.put(`${import.meta.env.VITE_BACKEND}/recipes/${recipeId}/comments/${commentsId}/addReply`,{reply:inputValue},{
             headers:{
                 'Authorization': token,
             }

@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import InputElement from "../components/InputElement";
 import axios from "axios";
-
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 const Signup = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -20,14 +21,32 @@ const Signup = () => {
     setName(e.target.value);
     console.log(name);
   };
+
+  const notify = () => {
+    toast.error('Error while Signing up!!', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      // transition: Bounce,
+    });
+  }
   const signUp = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/users/signup", {
-        name:name,
+      const response = await toast.promise(axios.post("http://localhost:8080/users/signup", {
+        name: name,
         email: email,
         password: password,
-      });
+      }), {
+        pending: 'Signing Up',
+        success: 'Successfully Signed up!!',
+        error: 'Error while Signing up!!'
+      })
       if (response) {
         console.log(response);
         alert("User Created");
@@ -35,10 +54,12 @@ const Signup = () => {
       }
     } catch (error) {
       console.log(error);
+
     }
   };
   return (
     <>
+      <ToastContainer transition={Bounce} />
       <div className="h-screen flex items-center justify-center bg-white/50">
         <div className="w-full  max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 ">
           <form className="space-y-6" action="#" onSubmit={signUp}>

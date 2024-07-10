@@ -2,14 +2,14 @@ import InputElement from "../components/InputElement";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState, useSetRecoilState} from "recoil";
-import { userAtom } from "../atoms/userAtom";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 const Signin = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
+
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -24,25 +24,29 @@ const Signin = () => {
   const login = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/users/signin", {
+      const response = await toast.promise(axios.post("http://localhost:8080/users/signin", {
         email: email,
         password: password,
-      });
+      }), {
+        pending: 'User Signing in!!',
+        success: 'User Signin Successfull!!',
+        error: 'Error while log in!!'
+      }, 
+      { theme: "dark",
+        autoClose: 2000 });
       if (response) {
-        
-        
-        
-        localStorage.setItem("token",response.data.token);
-        localStorage.setItem("name",response.data.user.name);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("name", response.data.user.name);
         navigate("/")
       }
     } catch (error) {
       console.log(error);
     }
   };
-  
+
   return (
     <>
+      <ToastContainer transition={Bounce} />
       <div className="h-screen flex items-center justify-center bg-white/50">
         <div className="w-full  max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 ">
           <form className="space-y-6" action="#" onSubmit={login}>

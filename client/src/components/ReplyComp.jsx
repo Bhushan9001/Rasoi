@@ -4,6 +4,8 @@ import Avatar from './Avatar';
 import { useRecoilValue } from 'recoil';
 import { userAtom } from '../atoms/userAtom';
 import axios from 'axios';
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 const ReplyComp = ({ recipeId , commentsId }) => {
     const [isFocused, setIsFocused] = useState(false);
     const [inputValue, setInputValue] = useState('');
@@ -24,11 +26,19 @@ const ReplyComp = ({ recipeId , commentsId }) => {
     };
 
     const handleSubmit = async() => {
-        const response = await axios.put(`http://localhost:8080/recipes/${recipeId}/comments/${commentsId}/addReply`,{reply:inputValue},{
+        const response = await toast.promise(axios.put(`http://localhost:8080/recipes/${recipeId}/comments/${commentsId}/addReply`,{reply:inputValue},{
             headers:{
                 'Authorization': token,
             }
-        })
+        }),{
+            pending:"Adding Reply",
+            success:"Successfully added reply 👌",
+            error:"error while adding reply 😶"
+        },
+    {
+        theme:"dark",
+        autoClose:2000
+    })
         console.log(response);
         setIsFocused(false);
         setInputValue('');

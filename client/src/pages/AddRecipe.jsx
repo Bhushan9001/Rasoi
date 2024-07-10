@@ -4,6 +4,8 @@ import InstructionComp from '../components/InstructionComp'
 import { IoChevronBack } from "react-icons/io5";
 import { Link } from 'react-router-dom'
 import axios from 'axios';
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddRecipe = () => {
 
@@ -34,7 +36,7 @@ const AddRecipe = () => {
     };
 
 
-    
+
 
 
 
@@ -49,19 +51,26 @@ const AddRecipe = () => {
         // formData.append('instruction', instruction);
         instructions.forEach((instruction, index) => {
             formData.append(`instruction[${index}]`, instruction);
-          });
+        });
         // formData.append('ingredients', ingredients);
         ingredients.forEach((ingredient, index) => {
             formData.append(`ingredients[${index}][name]`, ingredient.name);
             formData.append(`ingredients[${index}][quantity]`, ingredient.quantity);
-          });
+        });
 
         try {
-            const response = await axios.post('http://localhost:8080/recipes', formData, {
+            const response = await toast.promise(axios.post('http://localhost:8080/recipes', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': token
                 }
+            }), {
+                pending: 'Adding Recipe',
+                success: 'Successfully added recipe👌',
+                error: 'Error while adding recipe😶'
+            },{
+                theme:"dark",
+                autoClose:2000
             });
             console.log(response.data)
         } catch (error) {
@@ -73,7 +82,8 @@ const AddRecipe = () => {
 
 
     return (
-        <>
+        <> 
+        <ToastContainer transition={Bounce} />
 
             <div className='px-10 py-8'>
 

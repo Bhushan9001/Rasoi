@@ -10,20 +10,13 @@ import Avatar from '../components/Avatar';
 import { WhatsappShareButton, FacebookShareButton, WhatsappIcon, FacebookIcon, LinkedinShareButton, LinkedinIcon, TelegramShareButton, TelegramIcon } from "react-share";
 import { PiPaperPlaneTiltFill } from "react-icons/pi";
 import DetailsSkeleton from '../components/DetailsSkeleton';
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const RecipeDetail = () => {
 
   const [loading, setLoading] = useState(false);
   const [flag, setFlag] = useState(false)
-  const location = useLocation();
-  const dest = location.state?.from;
-  console.log(dest);
-
-  const handleSent = () => {
-    setFlag(true);
-  }
-
-
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [recipe, setRecipe] = useState({})
@@ -39,6 +32,10 @@ const RecipeDetail = () => {
     setIsFocused(true);
   };
 
+  const handleSent = () => {
+    setFlag(true);
+  }
+
   const handleCancel = () => {
     setIsFocused(false);
     setInputValue('');
@@ -50,33 +47,36 @@ const RecipeDetail = () => {
 
   const handleSubmit = async () => {
     console.log('Comment submitted');
-    const response = await axios.post(`http://localhost:8080/recipes/${recipe.id}/comments`, { text: inputValue }, {
+    const response = await toast.promise(axios.post(`http://localhost:8080/recipes/${recipe.id}/comments`, { text: inputValue }, {
       headers: {
         'Authorization': token,
       }
-    })
+    }), {
+      pending: 'Adding Comment',
+      success: 'Comment added successfully👌',
+      error: 'Error while adding comment😶'
+    }, { theme: "dark", autoClose: 2000 })
     console.log(response.data);
     setIsFocused(false);
     setInputValue('');
     fetchRecipes();
   };
 
-  // const user = useRecoilValue(userAtom);
+  const fetchRecipes = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/recipes/${id}`);
+      if (response.data) {
+        console.log(response.data.recipe);
+        setRecipe(response.data.recipe); setLoading(false);
+
+      }
+    } catch (error) {
+      console.error('Error fetching recipe:', error);
+    }
+  };
 
   useEffect(() => {
     setLoading(true);
-    const fetchRecipes = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8080/recipes/${id}`);
-        if (response.data) {
-          console.log(response.data.recipe);
-          setRecipe(response.data.recipe); setLoading(false);
-
-        }
-      } catch (error) {
-        console.error('Error fetching recipe:', error);
-      }
-    };
     fetchRecipes();
   }, [])
 
@@ -93,7 +93,7 @@ const RecipeDetail = () => {
 
 
   return (
-    <>
+    <> <ToastContainer transition={Bounce}/>
       <Link to={"/recipes"} className='flex justify-start items-center text-center pl-5 cursor-pointer pt-7'>
         <IoChevronBack size={33} color={'#228b21'} />
         <div className='text-2xl font-barlow-condensed md:flex hidden text-[#228b21]'>Back To Recipes</div>
